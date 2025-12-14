@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF எழுத்து பிரித்தெடுப்பான்</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        // Initialize PDF.js worker
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Noto Sans Tamil', sans-serif;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #3b82f6;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen flex flex-col items-center py-10 px-4">
+
+    <div class="bg-white shadow-xl rounded-xl w-full max-w-3xl p-6 md:p-8">
+        
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-slate-800 mb-2">PDF எழுத்து பிரித்தெடுப்பான்</h1>
+            <p class="text-slate-500">உங்கள் PDF கோப்பை பதிவேற்றி, வடிவமைப்பு மாறாமல் எழுத்துக்களைப் பெறுங்கள்.</p>
+        </div>
+
+        <!-- Upload Area -->
+        <div id="drop-zone" class="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer relative">
+            <input type="file" id="file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
+            
+            <div class="flex flex-col items-center justify-center pointer-events-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                </svg>
+                <p class="text-lg font-semibold text-blue-700">PDF கோப்பைத் தேர்ந்தெடுக்கவும்</p>
+                <p class="text-sm text-blue-500 mt-1">அல்லது இங்கே Drag & Drop செய்யவும்</p>
+            </div>
+        </div>
+
+        <!-- Progress / Loading Status -->
+        <div id="status-container" class="hidden mt-6 bg-yellow-50 border border-yellow-200 rounded p-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="loader"></div>
+                <div>
+                    <p class="font-medium text-slate-700" id="status-text">செயலாக்கப்படுகிறது...</p>
+                    <p class="text-xs text-slate-500" id="page-count">பக்கம் 0 / 0</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Area -->
+        <div id="result-container" class="hidden mt-6">
+            <div class="flex justify-between items-center mb-2">
+                <label class="font-semibold text-slate-700">பிரித்தெடுக்கப்பட்ட எழுத்துக்கள்:</label>
+                <div class="flex gap-2">
+                    <button onclick="copyToClipboard()" class="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded transition">
+                        நகலெடு (Copy)
+                    </button>
+                    <button onclick="clearAll()" class="text-sm text-red-500 hover:text-red-700 px-2">
+                        அழி (Clear)
+                    </button>
+                </div>
+            </div>
+            
+            <textarea id="output-text" class="w-full h-64 p-4 border border-slate-300 rounded-lg bg-slate-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y whitespace-pre" readonly></textarea>
+            
+            <!-- Download Button -->
+            <button onclick="downloadText()" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Text கோப்பாகப் பதிவிறக்கவும்
+            </button>
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-msg" class="hidden mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            <span class="block sm:inline" id="error-text">பிழை ஏற்பட்டது.</span>
+        </div>
+
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('file-input');
+        const statusContainer = document.getElementById('status-container');
+        const statusText = document.getElementById('status-text');
+        const pageCountText = document.getElementById('page-count');
+        const resultContainer = document.getElementById('result-container');
+        const outputText = document.getElementById('output-text');
+        const errorMsg = document.getElementById('error-msg');
+        const errorText = document.getElementById('error-text');
+
+        let extractedContent = "";
+
+        fileInput.addEventListener('change', async function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.type !== 'application/pdf') {
+                showError("தயவுசெய்து சரியான PDF கோப்பைத் தேர்ந்தெடுக்கவும்.");
+                return;
+            }
+
+            resetUI();
+            statusContainer.classList.remove('hidden');
+            
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                await extractText(arrayBuffer);
+            } catch (err) {
+                console.error(err);
+                showError("PDF கோப்பைப் படிப்பதில் பிழை ஏற்பட்டது. கோப்பு சேதமடைந்திருக்கலாம்.");
+                statusContainer.classList.add('hidden');
+            }
+        });
+
+        async function extractText(data) {
+            try {
+                const pdf = await pdfjsLib.getDocument({ data }).promise;
+                const totalPages = pdf.numPages;
+                extractedContent = "";
+                
+                statusText.innerText = "எழுத்துக்கள் எடுக்கப்படுகின்றன...";
+
+                for (let i = 1; i <= totalPages; i++) {
+                    pageCountText.innerText = `பக்கம் ${i} / ${totalPages}`;
+                    
+                    const page = await pdf.getPage(i);
+                    const textContent = await page.getTextContent();
+                    
+                    let pageText = "";
+                    let lastY = -1;
+                    let lastX = -1;
+
+                    // 1. Text Items-ஐ தயார் செய்தல் (X, Y இடங்களுடன்)
+                    const items = textContent.items.map(item => ({
+                        str: item.str,
+                        x: item.transform[4],
+                        y: item.transform[5],
+                        w: item.width,
+                        h: item.height || item.transform[3]
+                    }));
+
+                    // 2. வரிசைப்படுத்துதல் (மேலிருந்து கீழ், இடமிருந்து வலம்)
+                    // Y மதிப்பில் சிறிய வித்தியாசம் இருந்தால் ஒரே வரியாகக் கருதுவோம் (Threshold: 5)
+                    items.sort((a, b) => {
+                        const yDiff = Math.abs(a.y - b.y);
+                        if (yDiff < 5) {
+                            return a.x - b.x; // ஒரே வரியில் இருந்தால், இடமிருந்து வலம்
+                        }
+                        return b.y - a.y; // இல்லையென்றால், மேலிருந்து கீழ்
+                    });
+
+                    // 3. வரியையும் இடைவெளியையும் தீர்மானித்தல்
+                    for (let j = 0; j < items.length; j++) {
+                        const item = items[j];
+                        
+                        if (lastY !== -1) {
+                            // செங்குத்து இடைவெளி (Y difference) அதிகமாக இருந்தால் புதிய வரி (New Line)
+                            if (Math.abs(item.y - lastY) > 8) { 
+                                pageText += "\n";
+                                lastX = -1; // புதிய வரியில் X-ஐ ரீசெட் செய்யவும்
+                            } else {
+                                // கிடைமட்ட இடைவெளி (X difference) இருந்தால் Space சேர்க்கவும்
+                                if (lastX !== -1 && item.x > lastX + 5) {
+                                    pageText += " ";
+                                }
+                            }
+                        }
+                        
+                        pageText += item.str;
+                        lastY = item.y;
+                        // எழுத்தின் அகலத்தைக் கூட்டி அடுத்த எழுத்து எங்கே வர வேண்டும் என்று கணிக்கிறோம்
+                        // அகலம் கிடைக்காத பட்சத்தில், எழுத்து எண்ணிக்கையை வைத்து ஒரு தோராய மதிப்பு
+                        const charWidth = item.w > 0 ? item.w : item.str.length * 4; 
+                        lastX = item.x + charWidth;
+                    }
+                    
+                    extractedContent += `--- பக்கம் ${i} ---\n\n${pageText}\n\n`;
+                }
+
+                statusContainer.classList.add('hidden');
+                resultContainer.classList.remove('hidden');
+                outputText.value = extractedContent;
+
+            } catch (err) {
+                console.error(err);
+                showError("எழுத்துக்களைப் பிரித்தெடுப்பதில் சிக்கல். இது Password போடப்பட்ட PDF ஆக இருக்கலாம்.");
+                statusContainer.classList.add('hidden');
+            }
+        }
+
+        function downloadText() {
+            if (!extractedContent) return;
+
+            const blob = new Blob([extractedContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'extracted_text.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function copyToClipboard() {
+            if (!outputElement.value) return;
+            outputElement.select();
+            document.execCommand('copy');
+            alert("எழுத்துக்கள் நகலெடுக்கப்பட்டன! (Copied)");
+        }
+        
+        const outputElement = document.getElementById('output-text');
+
+        function clearAll() {
+            fileInput.value = '';
+            resetUI();
+        }
+
+        function resetUI() {
+            extractedContent = "";
+            outputText.value = "";
+            resultContainer.classList.add('hidden');
+            statusContainer.classList.add('hidden');
+            errorMsg.classList.add('hidden');
+        }
+
+        function showError(msg) {
+            errorText.innerText = msg;
+            errorMsg.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
