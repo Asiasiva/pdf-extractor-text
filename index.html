@@ -1,251 +1,739 @@
 <!DOCTYPE html>
-<html lang="ta">
+<html lang="ta" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PDF எழுத்து பிரித்தெடுப்பான்</title>
-    <!-- Tailwind CSS for styling -->
+    <title>AI PDF & Image தமிழ் Unicode பிரித்தெடுப்பான்</title>
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- PDF.js Library -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- PDF.js Library for rendering PDF pages -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script>
-        // Initialize PDF.js worker
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap');
         body {
-            font-family: 'Noto Sans Tamil', sans-serif;
+            font-family: 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3b82f6;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f172a;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #475569;
         }
     </style>
 </head>
-<body class="bg-slate-100 min-h-screen flex flex-col items-center py-10 px-4">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-blue-500 selection:text-white">
 
-    <div class="bg-white shadow-xl rounded-xl w-full max-w-3xl p-6 md:p-8">
-        
-        <!-- Header -->
-        <div class="text-center mb-8">
-            <h1 class="text-3xl font-bold text-slate-800 mb-2">PDF எழுத்து பிரித்தெடுப்பான்</h1>
-            <p class="text-slate-500">உங்கள் PDF கோப்பை பதிவேற்றி, வடிவமைப்பு மாறாமல் எழுத்துக்களைப் பெறுங்கள்.</p>
-        </div>
-
-        <!-- Upload Area -->
-        <div id="drop-zone" class="border-2 border-dashed border-blue-300 rounded-lg p-8 text-center bg-blue-50 hover:bg-blue-100 transition-colors cursor-pointer relative">
-            <input type="file" id="file-input" accept=".pdf" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-            
-            <div class="flex flex-col items-center justify-center pointer-events-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-500 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
-                </svg>
-                <p class="text-lg font-semibold text-blue-700">PDF கோப்பைத் தேர்ந்தெடுக்கவும்</p>
-                <p class="text-sm text-blue-500 mt-1">அல்லது இங்கே Drag & Drop செய்யவும்</p>
-            </div>
-        </div>
-
-        <!-- Progress / Loading Status -->
-        <div id="status-container" class="hidden mt-6 bg-yellow-50 border border-yellow-200 rounded p-4 flex items-center justify-between">
+    <!-- Header -->
+    <header class="border-b border-slate-800/80 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 py-3.5 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div class="flex items-center gap-3">
-                <div class="loader"></div>
+                <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 p-2.5 rounded-xl shadow-lg shadow-blue-500/20">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
                 <div>
-                    <p class="font-medium text-slate-700" id="status-text">செயலாக்கப்படுகிறது...</p>
-                    <p class="text-xs text-slate-500" id="page-count">பக்கம் 0 / 0</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Result Area -->
-        <div id="result-container" class="hidden mt-6">
-            <div class="flex justify-between items-center mb-2">
-                <label class="font-semibold text-slate-700">பிரித்தெடுக்கப்பட்ட எழுத்துக்கள்:</label>
-                <div class="flex gap-2">
-                    <button onclick="copyToClipboard()" class="text-sm bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-1 rounded transition">
-                        நகலெடு (Copy)
-                    </button>
-                    <button onclick="clearAll()" class="text-sm text-red-500 hover:text-red-700 px-2">
-                        அழி (Clear)
-                    </button>
+                    <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-300 bg-clip-text text-transparent">
+                        AI PDF & Image தமிழ் Unicode பிரித்தெடுப்பான்
+                    </h1>
+                    <p class="text-xs text-slate-400">PDF, JPG, JPEG, PNG கோப்புகளிலிருந்து Bamini, TAB, Scanned உரைகளை Unicode தமிழாக மாற்றலாம்</p>
                 </div>
             </div>
             
-            <textarea id="output-text" class="w-full h-64 p-4 border border-slate-300 rounded-lg bg-slate-50 text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y whitespace-pre" readonly></textarea>
+            <div class="flex items-center gap-3">
+                <span class="inline-flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-full text-xs text-slate-300 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    <span>Gemini 3.1 Flash AI Powered</span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto w-full px-4 py-6 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- Left Column: Settings & Input Queue -->
+        <div class="lg:col-span-5 flex flex-col gap-5">
             
-            <!-- Download Button -->
-            <button onclick="downloadText()" class="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-4 rounded-lg shadow transition flex items-center justify-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                </svg>
-                Text கோப்பாகப் பதிவிறக்கவும்
-            </button>
+            <!-- Gemini API Key Input Card -->
+            <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex justify-between items-center mb-2.5">
+                    <label for="api-key" class="text-xs font-semibold text-slate-200 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                        </svg>
+                        Gemini API Key
+                    </label>
+                    <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1 transition">
+                        இலவச Key பெற 
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="relative">
+                    <input type="password" id="api-key" placeholder="AIzaSy..." class="w-full bg-slate-950 border border-slate-700/80 focus:border-blue-500 text-slate-100 text-xs rounded-xl px-3.5 py-2.5 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition">
+                    <button type="button" id="toggle-key-btn" class="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                    </button>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-2">
+                    * API சாவி உங்கள் உலாவியில் மட்டுமே பாதுகாப்பாகப் பயன்படுத்தப்படும்.
+                </p>
+            </div>
+
+            <!-- Upload Dropzone (Supports PDF, JPG, JPEG, PNG, WEBP, BMP) -->
+            <div id="drop-zone" class="border-2 border-dashed border-slate-700 hover:border-blue-500 bg-slate-900/40 hover:bg-slate-900/80 rounded-2xl p-6 text-center transition-all cursor-pointer relative group flex flex-col items-center justify-center min-h-[200px]">
+                <input type="file" id="file-input" accept=".pdf, image/*, .jpg, .jpeg, .png, .webp, .bmp" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                
+                <div class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl mb-3 group-hover:scale-110 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                    </svg>
+                </div>
+                <h3 class="text-sm font-semibold text-slate-200 mb-1">PDF அல்லது படக் கோப்புகளைத் தேர்ந்தெடுக்கவும்</h3>
+                <p class="text-xs text-slate-400 mb-3">PDF, JPG, JPEG, PNG, WEBP, BMP படங்களை நேரடியாக Drag & Drop செய்யவும்</p>
+                <div class="flex flex-wrap justify-center gap-1.5">
+                    <span class="bg-slate-800 text-slate-300 text-[10px] px-2.5 py-0.5 rounded-full font-medium border border-slate-700">PDF Document</span>
+                    <span class="bg-slate-800 text-slate-300 text-[10px] px-2.5 py-0.5 rounded-full font-medium border border-slate-700">JPG / JPEG</span>
+                    <span class="bg-slate-800 text-slate-300 text-[10px] px-2.5 py-0.5 rounded-full font-medium border border-slate-700">PNG / WEBP</span>
+                </div>
+            </div>
+
+            <!-- Uploaded Files List / Queue Preview -->
+            <div id="file-queue-card" class="hidden bg-slate-900/90 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex justify-between items-center mb-3">
+                    <h4 class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                        </svg>
+                        தேர்ந்தெடுக்கப்பட்ட கோப்புகள் (<span id="file-count">0</span>)
+                    </h4>
+                    <button onclick="clearFiles()" class="text-[11px] text-rose-400 hover:underline">அனைத்தையும் நீக்கு</button>
+                </div>
+                <div id="file-list" class="max-h-40 overflow-y-auto custom-scrollbar space-y-2 pr-1">
+                    <!-- Dynamic File Items -->
+                </div>
+                <button id="start-btn" onclick="startExtraction()" class="mt-3 w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    Unicode ஆக மாற்றத் தொடங்கு
+                </button>
+            </div>
+
+            <!-- Information Card -->
+            <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-400 space-y-2">
+                <h4 class="font-semibold text-slate-200 text-xs mb-1.5 flex items-center gap-1.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    சிறப்பம்சங்கள்:
+                </h4>
+                <p class="leading-relaxed">✨ <b>அனைத்து பட வகைகளும்:</b> JPG, JPEG, PNG, WEBP, BMP படங்களை நேரடியாக ஏற்றலாம்.</p>
+                <p class="leading-relaxed">✨ <b>PDF ஆதரவு:</b> Scanned PDF மற்றும் Multi-page PDF ஆவணங்களை உயர் தரத்தில் வாசிக்கும்.</p>
+                <p class="leading-relaxed">✨ <b>பழைய எழுத்துருக்கள்:</b> Bamini, TAB, TAM, TSCII, Senthamizh எழுத்துக்களை துல்லியமாக Unicode ஆக மாற்றும்.</p>
+            </div>
         </div>
 
-        <!-- Error Message -->
-        <div id="error-msg" class="hidden mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-            <span class="block sm:inline" id="error-text">பிழை ஏற்பட்டது.</span>
-        </div>
+        <!-- Right Column: Processing Status & Extracted Output -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+            
+            <!-- Progress / Status Container -->
+            <div id="status-container" class="hidden bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-xl">
+                <div class="flex items-center justify-between mb-2">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                        <span id="status-text" class="font-medium text-slate-200 text-xs">செயலாக்கப்படுகிறது...</span>
+                    </div>
+                    <span id="progress-percentage" class="text-xs font-semibold text-blue-400 bg-blue-500/10 px-2 py-0.5 rounded-md">0%</span>
+                </div>
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
 
+            <!-- Result Box Card -->
+            <div id="result-container" class="bg-slate-900/90 border border-slate-800 rounded-2xl p-5 shadow-xl flex-1 flex flex-col justify-between">
+                <div>
+                    <!-- Header Actions -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3 pb-3 border-b border-slate-800">
+                        <div>
+                            <h2 class="font-bold text-slate-100 text-base">பிரித்தெடுக்கப்பட்ட Unicode தமிழ் உரை</h2>
+                            <p class="text-[11px] text-slate-400">Word, Notepad, Web அல்லது Facebook/WhatsApp-ல் நேரடியாகப் பயன்படுத்தலாம்.</p>
+                        </div>
+                        
+                        <!-- Quick Actions -->
+                        <div class="flex items-center gap-1.5 flex-wrap">
+                            <button onclick="speakText()" title="வாசித்துக் காட்டு (TTS)" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition border border-slate-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                </svg>
+                            </button>
+                            <button onclick="copyToClipboard()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1 font-medium border border-slate-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                </svg>
+                                நகலெடு
+                            </button>
+                            <button onclick="clearAll()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs px-3 py-1.5 rounded-xl transition font-medium border border-rose-500/20">
+                                அழி
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Search & Replace mini toolbar -->
+                    <div class="flex items-center gap-2 mb-3 bg-slate-950 p-2 rounded-xl border border-slate-800">
+                        <input type="text" id="search-input" placeholder="தேடு..." class="bg-slate-900 text-xs text-slate-200 px-2.5 py-1.5 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 w-1/3">
+                        <input type="text" id="replace-input" placeholder="மாற்று..." class="bg-slate-900 text-xs text-slate-200 px-2.5 py-1.5 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 w-1/3">
+                        <button onclick="replaceText()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition w-1/3">மாற்று (Replace)</button>
+                    </div>
+
+                    <!-- Textarea Output -->
+                    <textarea id="output-text" placeholder="PDF அல்லது படக் கோப்புகளைப் பதிவேற்றி 'Unicode ஆக மாற்றத் தொடங்கு' பொத்தானை அழுத்தவும்..." class="w-full h-80 lg:h-[380px] p-4 bg-slate-950 border border-slate-800/80 rounded-xl text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-blue-500/30 text-sm leading-relaxed font-sans custom-scrollbar resize-y whitespace-pre-wrap"></textarea>
+                    
+                    <!-- Stats bar -->
+                    <div class="flex justify-between items-center text-[11px] text-slate-500 mt-2 px-1">
+                        <span id="stat-words">சொற்கள்: 0</span>
+                        <span id="stat-chars">எழுத்துக்கள்: 0</span>
+                    </div>
+                </div>
+
+                <!-- Export Action Buttons -->
+                <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                    <button id="download-txt-btn" onclick="downloadText()" disabled class="bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                        .TXT கோப்பாகப் பதிவிறக்கு
+                    </button>
+                    <button id="download-doc-btn" onclick="downloadDocx()" disabled class="bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                        </svg>
+                        Word Document (.doc) ஆகப் பதிவிறக்கு
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Custom Toast Notification -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-slate-100 border border-slate-700 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 z-50 pointer-events-none">
+        <div id="toast-icon" class="text-blue-400">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+        <span id="toast-message" class="text-xs font-medium">செய்தி</span>
     </div>
 
+    <!-- Hidden Offscreen Canvas for rendering PDF/Image pages -->
+    <canvas id="offscreen-canvas" class="hidden"></canvas>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-800/80 py-4 text-center text-xs text-slate-500 mt-6">
+        <p>© 2026 AI PDF & Image Tamil Unicode Extractor. All rights reserved.</p>
+    </footer>
+
     <script>
+        // DOM References
+        const apiKeyInput = document.getElementById('api-key');
+        const toggleKeyBtn = document.getElementById('toggle-key-btn');
         const fileInput = document.getElementById('file-input');
+        const fileQueueCard = document.getElementById('file-queue-card');
+        const fileList = document.getElementById('file-list');
+        const fileCount = document.getElementById('file-count');
         const statusContainer = document.getElementById('status-container');
         const statusText = document.getElementById('status-text');
-        const pageCountText = document.getElementById('page-count');
-        const resultContainer = document.getElementById('result-container');
+        const progressBar = document.getElementById('progress-bar');
+        const progressPercentage = document.getElementById('progress-percentage');
         const outputText = document.getElementById('output-text');
-        const errorMsg = document.getElementById('error-msg');
-        const errorText = document.getElementById('error-text');
+        const downloadTxtBtn = document.getElementById('download-txt-btn');
+        const downloadDocBtn = document.getElementById('download-doc-btn');
+        const canvas = document.getElementById('offscreen-canvas');
+        const statWords = document.getElementById('stat-words');
+        const statChars = document.getElementById('stat-chars');
 
+        // State variables
+        let selectedFiles = [];
         let extractedContent = "";
+        const DEFAULT_API_KEY = ""; 
 
-        fileInput.addEventListener('change', async function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-
-            if (file.type !== 'application/pdf') {
-                showError("தயவுசெய்து சரியான PDF கோப்பைத் தேர்ந்தெடுக்கவும்.");
-                return;
-            }
-
-            resetUI();
-            statusContainer.classList.remove('hidden');
-            
-            try {
-                const arrayBuffer = await file.arrayBuffer();
-                await extractText(arrayBuffer);
-            } catch (err) {
-                console.error(err);
-                showError("PDF கோப்பைப் படிப்பதில் பிழை ஏற்பட்டது. கோப்பு சேதமடைந்திருக்கலாம்.");
-                statusContainer.classList.add('hidden');
+        // Load API key from local storage on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (savedKey) {
+                apiKeyInput.value = savedKey;
+            } else if (DEFAULT_API_KEY) {
+                apiKeyInput.value = DEFAULT_API_KEY;
             }
         });
 
-        async function extractText(data) {
-            try {
-                const pdf = await pdfjsLib.getDocument({ data }).promise;
-                const totalPages = pdf.numPages;
-                extractedContent = "";
+        apiKeyInput.addEventListener('input', () => {
+            localStorage.setItem('gemini_api_key', apiKeyInput.value.trim());
+        });
+
+        toggleKeyBtn.addEventListener('click', () => {
+            const type = apiKeyInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            apiKeyInput.setAttribute('type', type);
+        });
+
+        // Track stats when text changes
+        outputText.addEventListener('input', updateStats);
+
+        function updateStats() {
+            const text = outputText.value;
+            const chars = text.length;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            statWords.innerText = `சொற்கள்: ${words}`;
+            statChars.innerText = `எழுத்துக்கள்: ${chars}`;
+        }
+
+        // Handle File Selection (Both PDF and Images)
+        fileInput.addEventListener('change', (e) => {
+            handleFilesAdded(Array.from(e.target.files));
+        });
+
+        // Drag and drop handlers
+        const dropZone = document.getElementById('drop-zone');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+        function preventDefaults(e) { e.preventDefault(); e.stopPropagation(); }
+
+        dropZone.addEventListener('dragover', () => dropZone.classList.add('border-blue-500', 'bg-slate-900'));
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('border-blue-500', 'bg-slate-900'));
+        dropZone.addEventListener('drop', (e) => {
+            dropZone.classList.remove('border-blue-500', 'bg-slate-900');
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFilesAdded(Array.from(files));
+        });
+
+        function handleFilesAdded(files) {
+            if (!files.length) return;
+
+            // Filter for valid PDF and image types
+            const validFiles = files.filter(f => f.type === 'application/pdf' || f.type.startsWith('image/'));
+
+            if (validFiles.length === 0) {
+                showToast("தயவுசெய்து PDF அல்லது படக் கோப்புகளை மட்டுமே தேர்ந்தெடுக்கவும்.", "error");
+                return;
+            }
+
+            selectedFiles = [...selectedFiles, ...validFiles];
+            renderFileQueue();
+        }
+
+        function renderFileQueue() {
+            fileList.innerHTML = '';
+            fileCount.innerText = selectedFiles.length;
+
+            if (selectedFiles.length > 0) {
+                fileQueueCard.classList.remove('hidden');
+            } else {
+                fileQueueCard.classList.add('hidden');
+                return;
+            }
+
+            selectedFiles.forEach((file, index) => {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-2 bg-slate-950 rounded-xl border border-slate-800 text-xs';
                 
-                statusText.innerText = "எழுத்துக்கள் எடுக்கப்படுகின்றன...";
+                const isPdf = file.type === 'application/pdf';
+                const iconSvg = isPdf ? 
+                    `<svg class="h-4 w-4 text-rose-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V7.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 1H7a2 2 0 00-2 2v16a2 2 0 002 2z" /></svg>` :
+                    `<svg class="h-4 w-4 text-emerald-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>`;
 
-                for (let i = 1; i <= totalPages; i++) {
-                    pageCountText.innerText = `பக்கம் ${i} / ${totalPages}`;
-                    
-                    const page = await pdf.getPage(i);
-                    const textContent = await page.getTextContent();
-                    
-                    let pageText = "";
-                    let lastY = -1;
-                    let lastX = -1;
+                const sizeStr = (file.size / (1024 * 1024)).toFixed(2) + ' MB';
 
-                    // 1. Text Items-ஐ தயார் செய்தல் (X, Y இடங்களுடன்)
-                    const items = textContent.items.map(item => ({
-                        str: item.str,
-                        x: item.transform[4],
-                        y: item.transform[5],
-                        w: item.width,
-                        h: item.height || item.transform[3]
-                    }));
+                item.innerHTML = `
+                    <div class="flex items-center gap-2 overflow-hidden pr-2">
+                        ${iconSvg}
+                        <span class="truncate font-medium text-slate-200">${file.name}</span>
+                        <span class="text-[10px] text-slate-500 flex-shrink-0">(${sizeStr})</span>
+                    </div>
+                    <button onclick="removeFile(${index})" class="text-slate-500 hover:text-rose-400 p-1">
+                        <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                `;
+                fileList.appendChild(item);
+            });
+        }
 
-                    // 2. வரிசைப்படுத்துதல் (மேலிருந்து கீழ், இடமிருந்து வலம்)
-                    // Y மதிப்பில் சிறிய வித்தியாசம் இருந்தால் ஒரே வரியாகக் கருதுவோம் (Threshold: 5)
-                    items.sort((a, b) => {
-                        const yDiff = Math.abs(a.y - b.y);
-                        if (yDiff < 5) {
-                            return a.x - b.x; // ஒரே வரியில் இருந்தால், இடமிருந்து வலம்
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            renderFileQueue();
+        }
+
+        function clearFiles() {
+            selectedFiles = [];
+            fileInput.value = '';
+            renderFileQueue();
+        }
+
+        // Main process handler
+        async function startExtraction() {
+            let apiKey = apiKeyInput.value.trim() || DEFAULT_API_KEY;
+
+            if (!apiKey) {
+                showToast("தயவுசெய்து Gemini API Key-ஐ உள்ளிடவும்!", "error");
+                apiKeyInput.focus();
+                return;
+            }
+
+            if (selectedFiles.length === 0) {
+                showToast("குறைந்தது ஒரு கோப்பையாவது தேர்ந்தெடுக்கவும்.", "error");
+                return;
+            }
+
+            statusContainer.classList.remove('hidden');
+            extractedContent = "";
+            outputText.value = "";
+            downloadTxtBtn.disabled = true;
+            downloadDocBtn.disabled = true;
+
+            // Total tasks = sum of image files + total PDF pages
+            let tasks = [];
+
+            statusText.innerText = "கோப்புகள் பகுப்பாய்வு செய்யப்படுகின்றன...";
+            progressBar.style.width = '0%';
+            progressPercentage.innerText = '0%';
+
+            try {
+                // Prepare item queue
+                for (let file of selectedFiles) {
+                    if (file.type === 'application/pdf') {
+                        const arrayBuffer = await file.arrayBuffer();
+                        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                        for (let p = 1; p <= pdf.numPages; p++) {
+                            tasks.push({ type: 'pdf_page', pdf: pdf, pageNum: p, fileName: file.name, totalPages: pdf.numPages });
                         }
-                        return b.y - a.y; // இல்லையென்றால், மேலிருந்து கீழ்
-                    });
-
-                    // 3. வரியையும் இடைவெளியையும் தீர்மானித்தல்
-                    for (let j = 0; j < items.length; j++) {
-                        const item = items[j];
-                        
-                        if (lastY !== -1) {
-                            // செங்குத்து இடைவெளி (Y difference) அதிகமாக இருந்தால் புதிய வரி (New Line)
-                            if (Math.abs(item.y - lastY) > 8) { 
-                                pageText += "\n";
-                                lastX = -1; // புதிய வரியில் X-ஐ ரீசெட் செய்யவும்
-                            } else {
-                                // கிடைமட்ட இடைவெளி (X difference) இருந்தால் Space சேர்க்கவும்
-                                if (lastX !== -1 && item.x > lastX + 5) {
-                                    pageText += " ";
-                                }
-                            }
-                        }
-                        
-                        pageText += item.str;
-                        lastY = item.y;
-                        // எழுத்தின் அகலத்தைக் கூட்டி அடுத்த எழுத்து எங்கே வர வேண்டும் என்று கணிக்கிறோம்
-                        // அகலம் கிடைக்காத பட்சத்தில், எழுத்து எண்ணிக்கையை வைத்து ஒரு தோராய மதிப்பு
-                        const charWidth = item.w > 0 ? item.w : item.str.length * 4; 
-                        lastX = item.x + charWidth;
+                    } else if (file.type.startsWith('image/')) {
+                        tasks.push({ type: 'image', file: file, fileName: file.name });
                     }
-                    
-                    extractedContent += `--- பக்கம் ${i} ---\n\n${pageText}\n\n`;
                 }
 
-                statusContainer.classList.add('hidden');
-                resultContainer.classList.remove('hidden');
-                outputText.value = extractedContent;
+                const totalTasks = tasks.length;
+
+                for (let i = 0; i < totalTasks; i++) {
+                    const task = tasks[i];
+                    const currentPct = Math.round(((i) / totalTasks) * 100);
+                    progressBar.style.width = `${currentPct}%`;
+                    progressPercentage.innerText = `${currentPct}%`;
+
+                    let base64Image = "";
+
+                    if (task.type === 'pdf_page') {
+                        statusText.innerText = `வாசிக்கிறது: ${task.fileName} (பக்கம் ${task.pageNum} / ${task.totalPages})`;
+                        base64Image = await renderPdfPageToBase64(task.pdf, task.pageNum);
+                        extractedContent += `\n--- [${task.fileName} - பக்கம் ${task.pageNum}] ---\n\n`;
+                    } else {
+                        statusText.innerText = `படத்தை வாசிக்கிறது: ${task.fileName}`;
+                        base64Image = await renderImageFileToBase64(task.file);
+                        extractedContent += `\n--- [படம்: ${task.fileName}] ---\n\n`;
+                    }
+
+                    // Call Gemini API
+                    const pageText = await callGeminiVisionApi(base64Image, apiKey);
+                    extractedContent += `${pageText}\n\n`;
+                    outputText.value = extractedContent;
+                    outputText.scrollTop = outputText.scrollHeight;
+                    updateStats();
+                }
+
+                // Finalize
+                progressBar.style.width = '100%';
+                progressPercentage.innerText = '100%';
+                statusText.innerText = "அனைத்துக் கோப்புகளும் வெற்றிகரமாகUnicode ஆக மாற்றப்பட்டன!";
+                showToast("தமிழ் Unicode உரை வெற்றி!", "success");
+
+                downloadTxtBtn.disabled = false;
+                downloadDocBtn.disabled = false;
+
+                setTimeout(() => {
+                    statusContainer.classList.add('hidden');
+                }, 2000);
 
             } catch (err) {
-                console.error(err);
-                showError("எழுத்துக்களைப் பிரித்தெடுப்பதில் சிக்கல். இது Password போடப்பட்ட PDF ஆக இருக்கலாம்.");
+                console.error("Extraction error:", err);
+                showToast("செயலாக்கத்தில் பிழை ஏற்பட்டது. API Key சரியாக உள்ளதா என பார்க்கவும்.", "error");
                 statusContainer.classList.add('hidden');
+            }
+        }
+
+        async function renderPdfPageToBase64(pdf, pageNum) {
+            const page = await pdf.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1.8 }); // Crisp rendering scale
+            const ctx = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            await page.render({
+                canvasContext: ctx,
+                viewport: viewport
+            }).promise;
+
+            return canvas.toDataURL('image/jpeg', 0.85).split(',')[1];
+        }
+
+        async function renderImageFileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const ctx = canvas.getContext('2d');
+                        // Scale canvas if image is ultra high resolution for optimized API payload size
+                        let width = img.width;
+                        let height = img.height;
+                        const maxDim = 2400;
+                        if (width > maxDim || height > maxDim) {
+                            if (width > height) {
+                                height = Math.round((height * maxDim) / width);
+                                width = maxDim;
+                            } else {
+                                width = Math.round((width * maxDim) / height);
+                                height = maxDim;
+                            }
+                        }
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+                        resolve(dataUrl.split(',')[1]);
+                    };
+                    img.onerror = reject;
+                    img.src = e.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function callGeminiVisionApi(base64ImageData, apiKey) {
+            const systemPrompt = `You are a high-accuracy Tamil OCR expert and Unicode typist specializing in legacy Tamil font conversion (such as Bamini, TAB, TAM, TSCII, Senthamizh, Diamond, etc.) and scanned Tamil image document extraction.
+
+CRITICAL INSTRUCTIONS:
+1. Extract ALL text present in the image accurately into standard 100% Unicode Tamil (தமிழ் Unicode).
+2. If the text in the image uses Bamini or old non-Unicode encodings, visually decipher the glyphs and output standard Unicode Tamil.
+3. Preserve paragraph breaks, lists, headings, and structure.
+4. Do NOT output non-Tamil ASCII gibberish (e.g. 'jhki', 'mth;'). Replace them with actual Tamil words (e.g. 'தாமரை', 'அவர்').
+5. Output ONLY the extracted Tamil text content. Do NOT include intro text like "Here is the extracted text:".`;
+
+            const payload = {
+                contents: [
+                    {
+                        role: "user",
+                        parts: [
+                            { text: "Extract and convert all Tamil text on this image/page into accurate, clean Unicode Tamil text." },
+                            {
+                                inlineData: {
+                                    mimeType: "image/jpeg",
+                                    data: base64ImageData
+                                }
+                            }
+                        ]
+                    }
+                ],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                }
+            };
+
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+            let retries = 0;
+            const maxRetries = 3;
+            let delay = 1000;
+
+            while (retries <= maxRetries) {
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        const errData = await response.json();
+                        throw new Error(errData.error?.message || `HTTP ${response.status}`);
+                    }
+
+                    const result = await response.json();
+                    const textOutput = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    return textOutput ? textOutput.trim() : "[இப்பக்கத்தில் உரை எதுவும் கண்டறியப்படவில்லை]";
+
+                } catch (error) {
+                    retries++;
+                    if (retries > maxRetries) {
+                        console.error("Gemini API Error after retries:", error);
+                        return `[செயலாக்கத்தில் பிழை: ${error.message}]`;
+                    }
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    delay *= 2;
+                }
             }
         }
 
         function downloadText() {
-            if (!extractedContent) return;
+            if (!outputText.value) return;
 
-            const blob = new Blob([extractedContent], { type: 'text/plain' });
+            const blob = new Blob([outputText.value], { type: 'text/plain;charset=utf-8' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'extracted_text.txt';
+            a.download = 'extracted_tamil_unicode.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
+            showToast("TXT கோப்பு பதிவிறக்கப்பட்டது!", "success");
+        }
+
+        function downloadDocx() {
+            if (!outputText.value) return;
+
+            const content = `
+                <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+                <head><meta charset='utf-8'><title>Tamil Unicode Document</title>
+                <style>
+                    body { font-family: 'Noto Sans Tamil', 'Latha', 'Arial', sans-serif; font-size: 12pt; line-height: 1.6; }
+                </style>
+                </head>
+                <body>
+                    <div>${outputText.value.replace(/\n/g, '<br/>')}</div>
+                </body>
+                </html>
+            `;
+
+            const blob = new Blob(['\ufeff' + content], { type: 'application/msword' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'extracted_tamil_unicode.doc';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showToast("Word document (.doc) பதிவிறக்கப்பட்டது!", "success");
         }
 
         function copyToClipboard() {
-            if (!outputElement.value) return;
-            outputElement.select();
+            if (!outputText.value) {
+                showToast("நகலெடுக்க உரை எதுவும் இல்லை!", "error");
+                return;
+            }
+            
+            outputText.select();
             document.execCommand('copy');
-            alert("எழுத்துக்கள் நகலெடுக்கப்பட்டன! (Copied)");
+            showToast("உரை வெற்றிகரமாக நகலெடுக்கப்பட்டது!", "success");
         }
-        
-        const outputElement = document.getElementById('output-text');
+
+        function replaceText() {
+            const searchStr = document.getElementById('search-input').value;
+            const replaceStr = document.getElementById('replace-input').value;
+
+            if (!searchStr) {
+                showToast("தேடப்பட வேண்டிய சொல்லை உள்ளிடவும்", "error");
+                return;
+            }
+
+            const regex = new RegExp(searchStr, 'g');
+            outputText.value = outputText.value.replace(regex, replaceStr);
+            updateStats();
+            showToast("சொற்கள் மாற்றப்பட்டன!", "success");
+        }
+
+        function speakText() {
+            if (!outputText.value) {
+                showToast("வாசிக்க உரை எதுவும் இல்லை", "error");
+                return;
+            }
+
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop any ongoing speech
+                const utterance = new SpeechSynthesisUtterance(outputText.value);
+                utterance.lang = 'ta-IN'; // Tamil language code
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+                showToast("உரை வாசிக்கப்படுகிறது...", "info");
+            } else {
+                showToast("உங்கள் உலாவி Voice synthesis-ஐ ஆதரிக்கவில்லை", "error");
+            }
+        }
 
         function clearAll() {
+            selectedFiles = [];
             fileInput.value = '';
-            resetUI();
-        }
-
-        function resetUI() {
             extractedContent = "";
             outputText.value = "";
-            resultContainer.classList.add('hidden');
+            renderFileQueue();
+            updateStats();
+            downloadTxtBtn.disabled = true;
+            downloadDocBtn.disabled = true;
             statusContainer.classList.add('hidden');
-            errorMsg.classList.add('hidden');
+            showToast("அனைத்தும் அழிக்கப்பட்டன.", "info");
         }
 
-        function showError(msg) {
-            errorText.innerText = msg;
-            errorMsg.classList.remove('hidden');
+        function showToast(message, type = "info") {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastMessage.innerText = message;
+
+            if (type === 'error') {
+                toastIcon.innerHTML = `<svg class="h-5 w-5 text-rose-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+            } else if (type === 'success') {
+                toastIcon.innerHTML = `<svg class="h-5 w-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>`;
+            } else {
+                toastIcon.innerHTML = `<svg class="h-5 w-5 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`;
+            }
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
         }
     </script>
 </body>
