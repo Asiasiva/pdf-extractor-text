@@ -1,56 +1,154 @@
+<!-- saved from url=(0014)about:internet -->
 <!DOCTYPE html>
-<html lang="ta" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI PDF & Image தமிழ் Unicode பிரித்தெடுப்பான்</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#eff6ff',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- PDF.js Library for rendering PDF pages -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-    </script>
-    <style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI PDF &amp; Image தமிழ் Unicode பிரித்தெடுப்பான்</title>
+<style>
+html,body{margin:0;padding:0;min-height:100%;}
+#dev-single-merge-app{display:flex;min-height:100vh;align-items:stretch;}
+#dsm-toggle{position:fixed;top:10px;left:10px;z-index:1300;background:#0f172a;color:#fff;border:1px solid #334155;border-radius:10px;padding:8px 12px;font-size:13px;font-weight:800;cursor:pointer;box-shadow:0 4px 14px rgba(0,0,0,.25);font-family:system-ui,-apple-system,sans-serif;}
+#dsm-toggle:hover{background:#1e293b;}
+#dev-single-merge-app.dsm-nav-hidden #dev-single-merge-nav{display:none !important;}
+#dev-single-merge-nav{position:sticky;top:0;height:100vh;width:240px;flex:0 0 240px;overflow-y:auto;display:flex;flex-direction:column;gap:6px;padding:50px 12px 14px;background:#0f172a;color:#fff;border-right:1px solid #334155;font-family:system-ui,-apple-system,sans-serif;z-index:1050;}
+#dev-single-merge-nav .dsm-brand{font-size:15px;font-weight:800;padding:4px 6px 10px;border-bottom:1px solid #334155;margin-bottom:6px;}
+#dev-single-merge-nav .dsm-brand small{display:block;font-size:11px;font-weight:400;color:#94a3b8;margin-top:2px;}
+#dev-single-merge-nav .dsm-tab{display:block;width:100%;text-align:left;border:1px solid #334155;background:#1e293b;color:#cbd5e1;border-radius:10px;padding:10px 12px;font-size:13px;font-weight:700;cursor:pointer;transition:all .15s;}
+#dev-single-merge-nav .dsm-tab:hover{background:#334155;color:#fff;}
+#dev-single-merge-nav .dsm-tab.active{background:#2563eb;border-color:#60a5fa;color:#fff;box-shadow:0 4px 14px #2563eb55;}
+#dev-single-merge-main{flex:1;min-width:0;}
+@media(max-width:760px){#dev-single-merge-app{flex-direction:column;}#dev-single-merge-nav{position:sticky;top:0;height:auto;width:auto;flex:none;flex-direction:row;overflow-x:auto;padding:50px 10px 8px;border-right:0;border-bottom:1px solid #334155;}#dev-single-merge-nav .dsm-brand{display:none;}#dev-single-merge-nav .dsm-tab{flex:0 0 auto;width:auto;white-space:nowrap;padding:8px 12px;}}
+
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Tamil:wght@300;400;500;600;700&display=swap');
         body {
             font-family: 'Noto Sans Tamil', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
+        }[data-single-merge-doc="1"] .custom-scrollbar::-webkit-scrollbar{
             width: 8px;
             height: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
+        }[data-single-merge-doc="1"] .custom-scrollbar::-webkit-scrollbar-track{
             background: #0f172a;
             border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
+        }[data-single-merge-doc="1"] .custom-scrollbar::-webkit-scrollbar-thumb{
             background: #334155;
             border-radius: 4px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        }[data-single-merge-doc="1"] .custom-scrollbar::-webkit-scrollbar-thumb:hover{
             background: #475569;
         }
-    </style>
+    
+
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    
+[data-single-merge-doc="3"] /* Dev Edtr Preview Auto-Fit */
+        html, [data-single-merge-doc="3"]{ max-width: 100%; overflow-x: hidden; }[data-single-merge-doc="3"] *, [data-single-merge-doc="3"] *::before, [data-single-merge-doc="3"] *::after{ box-sizing: border-box; }[data-single-merge-doc="3"] img, [data-single-merge-doc="3"] video, [data-single-merge-doc="3"] svg, [data-single-merge-doc="3"] canvas, [data-single-merge-doc="3"] iframe{ max-width: 100%; }[data-single-merge-doc="3"] table{ max-width: 100%; }[data-single-merge-doc="3"] pre, [data-single-merge-doc="3"] code{ max-width: 100%; overflow-x: auto; }
+        
+    
+[data-single-merge-doc="3"] *{box-sizing:border-box}[data-single-merge-doc="3"]{
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#101827;
+ color:#fff;
+}[data-single-merge-doc="3"] header{
+ padding:22px;
+ text-align:center;
+ background:#18263b;
+ border-bottom:1px solid #334155;
+}[data-single-merge-doc="3"] header h2{margin:0 0 8px;color:#60a5fa}[data-single-merge-doc="3"] header p{margin:0;color:#aabbd0;font-size:14px}[data-single-merge-doc="3"] .container{
+ max-width:1000px;
+ margin:25px auto;
+ padding:15px;
+}[data-single-merge-doc="3"] .upload{
+ border:2px dashed #4b91e8;
+ background:#1b2a40;
+ border-radius:15px;
+ padding:45px 15px;
+ text-align:center;
+ cursor:pointer;
+}[data-single-merge-doc="3"] .upload:hover{background:#233954}[data-single-merge-doc="3"] .upload h3{color:#60a5fa}[data-single-merge-doc="3"] input[type=file]{display:none}[data-single-merge-doc="3"] button{
+ border:0;
+ padding:12px 18px;
+ border-radius:8px;
+ background:#2563eb;
+ color:white;
+ cursor:pointer;
+ font-weight:bold;
+}[data-single-merge-doc="3"] button:hover{background:#1d4ed8}[data-single-merge-doc="3"] button:disabled{opacity:.4;cursor:not-allowed}[data-single-merge-doc="3"] .settings{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
+ margin:20px 0;
+}[data-single-merge-doc="3"] .setting{
+ background:#1b2a40;
+ padding:17px;
+ border-radius:10px;
+}[data-single-merge-doc="3"] .setting strong{display:block;color:#60a5fa;margin-bottom:7px}[data-single-merge-doc="3"] .setting span{font-size:20px;font-weight:bold}[data-single-merge-doc="3"] .info{
+ display:flex;
+ flex-wrap:wrap;
+ gap:12px;
+ margin:20px 0;
+}[data-single-merge-doc="3"] .info div{
+ flex:1;
+ min-width:120px;
+ background:#1b2a40;
+ padding:15px;
+ border-radius:10px;
+ text-align:center;
+}[data-single-merge-doc="3"] .info strong{display:block;color:#60a5fa;font-size:22px}[data-single-merge-doc="3"] .progress{
+ width:100%;
+ height:12px;
+ background:#334155;
+ border-radius:20px;
+ overflow:hidden;
+ margin:15px 0;
+}[data-single-merge-doc="3"] .bar{
+ width:0%;
+ height:100%;
+ background:#22c55e;
+ transition:width .2s;
+}[data-single-merge-doc="3"] .status{color:#aabbd0;font-size:14px;margin:10px 0}[data-single-merge-doc="3"] .actions{
+ display:flex;
+ flex-wrap:wrap;
+ gap:10px;
+ margin:20px 0;
+}[data-single-merge-doc="3"] .pages{
+ display:grid;
+ grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+ gap:15px;
+}[data-single-merge-doc="3"] .card{
+ background:#1b2a40;
+ border-radius:12px;
+ padding:12px;
+ overflow:hidden;
+}[data-single-merge-doc="3"] .card img{
+ width:100%;
+ height:auto;
+ background:white;
+ border-radius:6px;
+}[data-single-merge-doc="3"] .card h4{margin:10px 0}[data-single-merge-doc="3"] .card button{width:100%}[data-single-merge-doc="3"] .note{
+ background:#392d17;
+ color:#fcd34d;
+ padding:13px;
+ border-radius:9px;
+ font-size:13px;
+ line-height:1.6;
+ margin-top:20px;
+}
+@media(max-width:550px){[data-single-merge-doc="3"] .settings{grid-template-columns:1fr}[data-single-merge-doc="3"] .container{padding:12px}
+}
+
+[data-single-merge-doc]{display:none !important;min-height:100vh;}
+[data-single-merge-doc].dsm-active{display:block !important;}
+</style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-blue-500 selection:text-white">
+<body>
+<button type="button" id="dsm-toggle" aria-expanded="true" aria-controls="dev-single-merge-nav">✕ Hide</button>
+<div id="dev-single-merge-app">
+<nav id="dev-single-merge-nav" aria-label="Merged Modules"><div class="dsm-brand">Tools<small>ஒரு tool-அ தேர்ந்தெடு</small></div><button type="button" class="dsm-tab active" data-dsm-target="1">AI PDF &amp; Image தமிழ் Unicode பிரித்தெடுப்பான்</button><button type="button" class="dsm-tab" data-dsm-target="2">PDF Merge Tool</button><button type="button" class="dsm-tab" data-dsm-target="3">Ultra HD PDF to JPG Converter</button></nav>
+<main id="dev-single-merge-main">
+<section data-single-merge-doc="1" class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between antialiased selection:bg-blue-500 selection:text-white dsm-active">
 
     <!-- Header -->
     <header class="border-b border-slate-800/80 bg-slate-900/80 backdrop-blur sticky top-0 z-40">
@@ -58,12 +156,12 @@
             <div class="flex items-center gap-3">
                 <div class="bg-gradient-to-tr from-blue-600 to-indigo-500 p-2.5 rounded-xl shadow-lg shadow-blue-500/20">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
                 <div>
                     <h1 class="text-xl font-bold bg-gradient-to-r from-blue-400 via-indigo-300 to-purple-300 bg-clip-text text-transparent">
-                        AI PDF & Image தமிழ் Unicode பிரித்தெடுப்பான்
+                        AI PDF &amp; Image தமிழ் Unicode பிரித்தெடுப்பான்
                     </h1>
                     <p class="text-xs text-slate-400">PDF, JPG, JPEG, PNG கோப்புகளிலிருந்து Bamini, TAB, Scanned உரைகளை Unicode தமிழாக மாற்றலாம்</p>
                 </div>
@@ -88,14 +186,14 @@
                 <div class="flex justify-between items-center mb-2.5">
                     <label for="api-key" class="text-xs font-semibold text-slate-200 flex items-center gap-2">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
                         </svg>
                         Gemini API Key
                     </label>
                     <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" class="text-xs text-blue-400 hover:text-blue-300 hover:underline flex items-center gap-1 transition">
                         இலவச Key பெற 
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                         </svg>
                     </a>
                 </div>
@@ -103,8 +201,8 @@
                     <input type="password" id="api-key" placeholder="AIzaSy..." class="w-full bg-slate-950 border border-slate-700/80 focus:border-blue-500 text-slate-100 text-xs rounded-xl px-3.5 py-2.5 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition">
                     <button type="button" id="toggle-key-btn" class="absolute right-3 top-2.5 text-slate-500 hover:text-slate-300">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                         </svg>
                     </button>
                 </div>
@@ -115,15 +213,15 @@
 
             <!-- Upload Dropzone (Supports PDF, JPG, JPEG, PNG, WEBP, BMP) -->
             <div id="drop-zone" class="border-2 border-dashed border-slate-700 hover:border-blue-500 bg-slate-900/40 hover:bg-slate-900/80 rounded-2xl p-6 text-center transition-all cursor-pointer relative group flex flex-col items-center justify-center min-h-[200px]">
-                <input type="file" id="file-input" accept=".pdf, image/*, .jpg, .jpeg, .png, .webp, .bmp" multiple class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+                <input type="file" id="file-input" accept=".pdf, image/*, .jpg, .jpeg, .png, .webp, .bmp" multiple="" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
                 
                 <div class="p-3 bg-blue-500/10 text-blue-400 rounded-2xl mb-3 group-hover:scale-110 transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
                     </svg>
                 </div>
                 <h3 class="text-sm font-semibold text-slate-200 mb-1">PDF அல்லது படக் கோப்புகளைத் தேர்ந்தெடுக்கவும்</h3>
-                <p class="text-xs text-slate-400 mb-3">PDF, JPG, JPEG, PNG, WEBP, BMP படங்களை நேரடியாக Drag & Drop செய்யவும்</p>
+                <p class="text-xs text-slate-400 mb-3">PDF, JPG, JPEG, PNG, WEBP, BMP படங்களை நேரடியாக Drag &amp; Drop செய்யவும்</p>
                 <div class="flex flex-wrap justify-center gap-1.5">
                     <span class="bg-slate-800 text-slate-300 text-[10px] px-2.5 py-0.5 rounded-full font-medium border border-slate-700">PDF Document</span>
                     <span class="bg-slate-800 text-slate-300 text-[10px] px-2.5 py-0.5 rounded-full font-medium border border-slate-700">JPG / JPEG</span>
@@ -136,19 +234,19 @@
                 <div class="flex justify-between items-center mb-3">
                     <h4 class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
                         </svg>
                         தேர்ந்தெடுக்கப்பட்ட கோப்புகள் (<span id="file-count">0</span>)
                     </h4>
-                    <button onclick="clearFiles()" class="text-[11px] text-rose-400 hover:underline">அனைத்தையும் நீக்கு</button>
+                    <button onclick="__dsm_1_clearFiles()" class="text-[11px] text-rose-400 hover:underline">அனைத்தையும் நீக்கு</button>
                 </div>
                 <div id="file-list" class="max-h-40 overflow-y-auto custom-scrollbar space-y-2 pr-1">
                     <!-- Dynamic File Items -->
                 </div>
-                <button id="start-btn" onclick="startExtraction()" class="mt-3 w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                <button id="start-btn" onclick="__dsm_1_startExtraction()" class="mt-3 w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     Unicode ஆக மாற்றத் தொடங்கு
                 </button>
@@ -158,7 +256,7 @@
             <div class="bg-slate-900/60 border border-slate-800/80 rounded-2xl p-4 text-xs text-slate-400 space-y-2">
                 <h4 class="font-semibold text-slate-200 text-xs mb-1.5 flex items-center gap-1.5">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                     </svg>
                     சிறப்பம்சங்கள்:
                 </h4>
@@ -198,18 +296,18 @@
                         
                         <!-- Quick Actions -->
                         <div class="flex items-center gap-1.5 flex-wrap">
-                            <button onclick="speakText()" title="வாசித்துக் காட்டு (TTS)" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition border border-slate-700">
+                            <button onclick="__dsm_1_speakText()" title="வாசித்துக் காட்டு (TTS)" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-xl transition border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path>
                                 </svg>
                             </button>
-                            <button onclick="copyToClipboard()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1 font-medium border border-slate-700">
+                            <button onclick="__dsm_1_copyToClipboard()" class="bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs px-3 py-1.5 rounded-xl transition flex items-center gap-1 font-medium border border-slate-700">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                 </svg>
                                 நகலெடு
                             </button>
-                            <button onclick="clearAll()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs px-3 py-1.5 rounded-xl transition font-medium border border-rose-500/20">
+                            <button onclick="__dsm_1_clearAll()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs px-3 py-1.5 rounded-xl transition font-medium border border-rose-500/20">
                                 அழி
                             </button>
                         </div>
@@ -219,7 +317,7 @@
                     <div class="flex items-center gap-2 mb-3 bg-slate-950 p-2 rounded-xl border border-slate-800">
                         <input type="text" id="search-input" placeholder="தேடு..." class="bg-slate-900 text-xs text-slate-200 px-2.5 py-1.5 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 w-1/3">
                         <input type="text" id="replace-input" placeholder="மாற்று..." class="bg-slate-900 text-xs text-slate-200 px-2.5 py-1.5 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 w-1/3">
-                        <button onclick="replaceText()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition w-1/3">மாற்று (Replace)</button>
+                        <button onclick="__dsm_1_replaceText()" class="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg font-medium transition w-1/3">மாற்று (Replace)</button>
                     </div>
 
                     <!-- Textarea Output -->
@@ -234,15 +332,15 @@
 
                 <!-- Export Action Buttons -->
                 <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800">
-                    <button id="download-txt-btn" onclick="downloadText()" disabled class="bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                    <button id="download-txt-btn" onclick="__dsm_1_downloadText()" disabled="" class="bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
                         </svg>
                         .TXT கோப்பாகப் பதிவிறக்கு
                     </button>
-                    <button id="download-doc-btn" onclick="downloadDocx()" disabled class="bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
+                    <button id="download-doc-btn" onclick="__dsm_1_downloadDocx()" disabled="" class="bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold py-2.5 px-3 rounded-xl shadow-lg transition flex items-center justify-center gap-2 text-xs">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                         </svg>
                         Word Document (.doc) ஆகப் பதிவிறக்கு
                     </button>
@@ -256,7 +354,7 @@
     <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-slate-100 border border-slate-700 px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 z-50 pointer-events-none">
         <div id="toast-icon" class="text-blue-400">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
             </svg>
         </div>
         <span id="toast-message" class="text-xs font-medium">செய்தி</span>
@@ -267,10 +365,435 @@
 
     <!-- Footer -->
     <footer class="border-t border-slate-800/80 py-4 text-center text-xs text-slate-500 mt-6">
-        <p>© 2026 AI PDF & Image Tamil Unicode Extractor. All rights reserved.</p>
+        <p>© 2026 AI PDF &amp; Image Tamil Unicode Extractor. All rights reserved.</p>
     </footer>
 
-    <script>
+    
+
+</section>
+
+<section data-single-merge-doc="2" class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white dark:bg-gray-800 p-6 sm:p-10 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700">
+
+        <header class="text-center mb-10">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-blue-600 dark:text-blue-400 mb-3">PDF Merger</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-400">Combine multiple PDF documents into a single file directly in your browser.</p>
+        </header>
+
+        <!-- File Upload Section -->
+        <div class="mb-8 p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg hover:border-blue-500 dark:hover:border-blue-400 transition duration-300">
+            <label for="pdf-file-input" class="cursor-pointer block text-center">
+                <p class="text-xl font-semibold mb-2">Drag &amp; Drop PDFs here, or Click to Select</p>
+                <p class="text-sm text-gray-500 dark:text-gray-400">(Hold Ctrl/Cmd to select multiple files. Files will be merged in the order shown below.)</p>
+                <input type="file" id="pdf-file-input" accept=".pdf" multiple="" class="hidden" onchange="__dsm_2_handleFileSelect(event)">
+            </label>
+        </div>
+
+        <!-- File List and Action Section -->
+        <div id="file-list-container" class="mb-8">
+            <h2 class="text-2xl font-bold mb-4 border-b pb-2 border-gray-300 dark:border-gray-700">
+                Selected Files (<span id="file-count_m2_2">0</span>)
+            </h2>
+            <ul id="file-list_m2_2" class="space-y-2 max-h-60 overflow-y-auto pr-2">
+                <!-- File items will be injected here -->
+                <li id="file-placeholder" class="text-gray-500 dark:text-gray-400 text-center py-4">No PDF files selected yet.</li>
+            </ul>
+        </div>
+
+        <!-- Merge Button and Status -->
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
+            <button id="merge-button" onclick="__dsm_2_startMerge()" disabled="" class="w-full sm:w-auto px-8 py-3 text-lg font-bold text-white bg-blue-600 rounded-xl shadow-lg hover:bg-blue-700 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.01]">
+                Merge PDFs
+            </button>
+            <p id="status-message" class="text-center text-gray-600 dark:text-gray-400"></p>
+        </div>
+
+    </div>
+
+    <!-- JavaScript Logic -->
+    
+
+</section>
+
+<section data-single-merge-doc="3" class="">
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra HD PDF to JPG Converter</title>
+
+
+
+
+
+
+
+
+<header>
+ <h2>Ultra HD PDF to JPG</h2>
+ <p>800 DPI • JPG Quality 100% • High Resolution</p>
+</header>
+
+<div class="container">
+
+ <div class="upload" id="dropArea">
+  <div style="font-size:45px">📄</div>
+  <h3>PDF Upload செய்யவும்</h3>
+  <p>இங்கே PDF File-ஐ Drag &amp; Drop செய்யவும்</p>
+  <button onclick="document.getElementById('pdfFile').click()">Choose PDF</button>
+  <input type="file" id="pdfFile" accept=".pdf,application/pdf">
+  <p id="fileName"></p>
+ </div>
+
+ <div class="settings">
+  
+  
+ </div>
+
+ <div class="info">
+  <div>PDF Pages<strong id="totalPages">0</strong></div>
+  <div>Converted<strong id="converted">0</strong></div>
+  
+ </div>
+
+ <button id="convertBtn" style="width:100%;padding:16px" disabled="">
+  Convert All Pages to JPG
+ </button>
+
+ <div class="progress"><div class="bar" id="bar"></div></div>
+ <div class="status" id="status">PDF தேர்வு செய்யவும்.</div>
+
+ <div class="actions">
+  <button id="zipBtn" disabled="">⬇ Download All JPG (ZIP)</button>
+  <button id="clearBtn">Clear All</button>
+ </div>
+
+ <h3>Converted Pages</h3>
+ <div class="pages" id="pages"></div>
+
+</div>
+
+
+
+
+
+
+    
+    
+
+</section>
+</main>
+</div>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+<script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script>
+var slugMap={};
+function showDsmModule(idx){
+var sections=document.querySelectorAll('[data-single-merge-doc]');
+var tabs=document.querySelectorAll('#dev-single-merge-nav .dsm-tab');
+sections.forEach(function(s){s.classList.toggle('dsm-active',s.getAttribute('data-single-merge-doc')===String(idx));});
+tabs.forEach(function(t){t.classList.toggle('active',t.getAttribute('data-dsm-target')===String(idx));});
+window.scrollTo(0,0);
+if(window.innerWidth<=760){var _app=document.getElementById('dev-single-merge-app');var _tgl=document.getElementById('dsm-toggle');if(_app&&!_app.classList.contains('dsm-nav-hidden')){_app.classList.add('dsm-nav-hidden');if(_tgl){_tgl.textContent='☰ ';_tgl.setAttribute('aria-expanded','false');}}}
+window.dispatchEvent(new Event('resize'));
+try{document.dispatchEvent(new CustomEvent('dsm-module-shown',{detail:{index:String(idx)}}));}catch(e){}
+}
+document.getElementById('dev-single-merge-nav').addEventListener('click',function(e){
+var btn=e.target.closest('.dsm-tab');
+if(btn)showDsmModule(btn.getAttribute('data-dsm-target'));
+});
+document.addEventListener('click',function(e){
+var a=e.target.closest('a[href]');
+if(!a)return;
+var href=(a.getAttribute('href')||'').trim();
+if(!href||href.charAt(0)==='#'||/^(https?:|mailto:|tel:|javascript:)/i.test(href))return;
+if(/\.html?([?#].*)?$/i.test(href)){
+e.preventDefault();
+var slug=href.split(/[?#]/)[0].replace(/^\.\//,'').replace(/\.html?$/i,'').toLowerCase();
+if(slugMap[slug]){showDsmModule(slugMap[slug]);return;}
+var linkText=(a.textContent||'').trim().toLowerCase();
+var tabs=Array.from(document.querySelectorAll('#dev-single-merge-nav .dsm-tab'));
+var matched=tabs.find(function(t){return linkText&&t.textContent.toLowerCase().indexOf(linkText)>=0;});
+if(matched)showDsmModule(matched.getAttribute('data-dsm-target'));
+}
+},true);
+var dsmToggle=document.getElementById('dsm-toggle');
+var dsmApp=document.getElementById('dev-single-merge-app');
+function toggleDsmNav(){
+var hidden=dsmApp.classList.toggle('dsm-nav-hidden');
+if(dsmToggle){dsmToggle.textContent=hidden?'☰ Tools':'✕ Hide';dsmToggle.setAttribute('aria-expanded',String(!hidden));}
+}
+if(dsmToggle)dsmToggle.addEventListener('click',toggleDsmNav);
+</script>
+<script>
+(function(){
+try{
+var __dsmRealDoc=window.document;
+var __dsmScope=__dsmRealDoc.querySelector('[data-single-merge-doc="1"]');
+var __dsmPrevOnload=window.onload;
+var document=new Proxy(__dsmRealDoc,{
+get:function(t,prop){
+if(prop==="getElementById"){return function(id){try{if(__dsmScope){var all=__dsmScope.querySelectorAll("[id]");for(var i=0;i<all.length;i++){if(all[i].id===String(id))return all[i];}}}catch(e){}return t.getElementById(id);};}
+if(prop==="querySelector"){return function(sel){try{if(__dsmScope){var el=__dsmScope.querySelector(sel);if(el)return el;}}catch(e){}return t.querySelector(sel);};}
+if(prop==="querySelectorAll"){return function(sel){try{if(__dsmScope){var els=__dsmScope.querySelectorAll(sel);if(els&&els.length)return els;}}catch(e){}return t.querySelectorAll(sel);};}
+if(prop==="getElementsByClassName"){return function(cls){try{if(__dsmScope){var els=__dsmScope.getElementsByClassName(cls);if(els&&els.length)return els;}}catch(e){}return t.getElementsByClassName(cls);};}
+if(prop==="getElementsByTagName"){return function(tag){try{if(__dsmScope){var els=__dsmScope.getElementsByTagName(tag);if(els&&els.length)return els;}}catch(e){}return t.getElementsByTagName(tag);};}
+var v=t[prop];return (typeof v==="function")?v.bind(t):v;
+},
+set:function(t,prop,val){t[prop]=val;return true;},
+has:function(t,prop){return prop in t;}
+});
+
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    
+if(typeof updateStats!=="undefined"){window.__dsm_1_updateStats=updateStats;if(typeof window.updateStats==="undefined")window.updateStats=updateStats;}
+if(typeof preventDefaults!=="undefined"){window.__dsm_1_preventDefaults=preventDefaults;if(typeof window.preventDefaults==="undefined")window.preventDefaults=preventDefaults;}
+if(typeof handleFilesAdded!=="undefined"){window.__dsm_1_handleFilesAdded=handleFilesAdded;if(typeof window.handleFilesAdded==="undefined")window.handleFilesAdded=handleFilesAdded;}
+if(typeof renderFileQueue!=="undefined"){window.__dsm_1_renderFileQueue=renderFileQueue;if(typeof window.renderFileQueue==="undefined")window.renderFileQueue=renderFileQueue;}
+if(typeof removeFile!=="undefined"){window.__dsm_1_removeFile=removeFile;if(typeof window.removeFile==="undefined")window.removeFile=removeFile;}
+if(typeof clearFiles!=="undefined"){window.__dsm_1_clearFiles=clearFiles;if(typeof window.clearFiles==="undefined")window.clearFiles=clearFiles;}
+if(typeof startExtraction!=="undefined"){window.__dsm_1_startExtraction=startExtraction;if(typeof window.startExtraction==="undefined")window.startExtraction=startExtraction;}
+if(typeof renderPdfPageToBase64!=="undefined"){window.__dsm_1_renderPdfPageToBase64=renderPdfPageToBase64;if(typeof window.renderPdfPageToBase64==="undefined")window.renderPdfPageToBase64=renderPdfPageToBase64;}
+if(typeof renderImageFileToBase64!=="undefined"){window.__dsm_1_renderImageFileToBase64=renderImageFileToBase64;if(typeof window.renderImageFileToBase64==="undefined")window.renderImageFileToBase64=renderImageFileToBase64;}
+if(typeof callGeminiVisionApi!=="undefined"){window.__dsm_1_callGeminiVisionApi=callGeminiVisionApi;if(typeof window.callGeminiVisionApi==="undefined")window.callGeminiVisionApi=callGeminiVisionApi;}
+if(typeof downloadText!=="undefined"){window.__dsm_1_downloadText=downloadText;if(typeof window.downloadText==="undefined")window.downloadText=downloadText;}
+if(typeof downloadDocx!=="undefined"){window.__dsm_1_downloadDocx=downloadDocx;if(typeof window.downloadDocx==="undefined")window.downloadDocx=downloadDocx;}
+if(typeof copyToClipboard!=="undefined"){window.__dsm_1_copyToClipboard=copyToClipboard;if(typeof window.copyToClipboard==="undefined")window.copyToClipboard=copyToClipboard;}
+if(typeof replaceText!=="undefined"){window.__dsm_1_replaceText=replaceText;if(typeof window.replaceText==="undefined")window.replaceText=replaceText;}
+if(typeof speakText!=="undefined"){window.__dsm_1_speakText=speakText;if(typeof window.speakText==="undefined")window.speakText=speakText;}
+if(typeof clearAll!=="undefined"){window.__dsm_1_clearAll=clearAll;if(typeof window.clearAll==="undefined")window.clearAll=clearAll;}
+if(typeof showToast!=="undefined"){window.__dsm_1_showToast=showToast;if(typeof window.showToast==="undefined")window.showToast=showToast;}
+if(typeof apiKeyInput!=="undefined"){window.__dsm_1_apiKeyInput=apiKeyInput;if(typeof window.apiKeyInput==="undefined")window.apiKeyInput=apiKeyInput;}
+if(typeof toggleKeyBtn!=="undefined"){window.__dsm_1_toggleKeyBtn=toggleKeyBtn;if(typeof window.toggleKeyBtn==="undefined")window.toggleKeyBtn=toggleKeyBtn;}
+if(typeof fileInput!=="undefined"){window.__dsm_1_fileInput=fileInput;if(typeof window.fileInput==="undefined")window.fileInput=fileInput;}
+if(typeof fileQueueCard!=="undefined"){window.__dsm_1_fileQueueCard=fileQueueCard;if(typeof window.fileQueueCard==="undefined")window.fileQueueCard=fileQueueCard;}
+if(typeof fileList!=="undefined"){window.__dsm_1_fileList=fileList;if(typeof window.fileList==="undefined")window.fileList=fileList;}
+if(typeof fileCount!=="undefined"){window.__dsm_1_fileCount=fileCount;if(typeof window.fileCount==="undefined")window.fileCount=fileCount;}
+if(typeof statusContainer!=="undefined"){window.__dsm_1_statusContainer=statusContainer;if(typeof window.statusContainer==="undefined")window.statusContainer=statusContainer;}
+if(typeof statusText!=="undefined"){window.__dsm_1_statusText=statusText;if(typeof window.statusText==="undefined")window.statusText=statusText;}
+if(typeof progressBar!=="undefined"){window.__dsm_1_progressBar=progressBar;if(typeof window.progressBar==="undefined")window.progressBar=progressBar;}
+if(typeof progressPercentage!=="undefined"){window.__dsm_1_progressPercentage=progressPercentage;if(typeof window.progressPercentage==="undefined")window.progressPercentage=progressPercentage;}
+if(typeof outputText!=="undefined"){window.__dsm_1_outputText=outputText;if(typeof window.outputText==="undefined")window.outputText=outputText;}
+if(typeof downloadTxtBtn!=="undefined"){window.__dsm_1_downloadTxtBtn=downloadTxtBtn;if(typeof window.downloadTxtBtn==="undefined")window.downloadTxtBtn=downloadTxtBtn;}
+if(typeof downloadDocBtn!=="undefined"){window.__dsm_1_downloadDocBtn=downloadDocBtn;if(typeof window.downloadDocBtn==="undefined")window.downloadDocBtn=downloadDocBtn;}
+if(typeof canvas!=="undefined"){window.__dsm_1_canvas=canvas;if(typeof window.canvas==="undefined")window.canvas=canvas;}
+if(typeof statWords!=="undefined"){window.__dsm_1_statWords=statWords;if(typeof window.statWords==="undefined")window.statWords=statWords;}
+if(typeof statChars!=="undefined"){window.__dsm_1_statChars=statChars;if(typeof window.statChars==="undefined")window.statChars=statChars;}
+if(typeof selectedFiles!=="undefined"){window.__dsm_1_selectedFiles=selectedFiles;if(typeof window.selectedFiles==="undefined")window.selectedFiles=selectedFiles;}
+if(typeof extractedContent!=="undefined"){window.__dsm_1_extractedContent=extractedContent;if(typeof window.extractedContent==="undefined")window.extractedContent=extractedContent;}
+if(typeof DEFAULT_API_KEY!=="undefined"){window.__dsm_1_DEFAULT_API_KEY=DEFAULT_API_KEY;if(typeof window.DEFAULT_API_KEY==="undefined")window.DEFAULT_API_KEY=DEFAULT_API_KEY;}
+if(typeof savedKey!=="undefined"){window.__dsm_1_savedKey=savedKey;if(typeof window.savedKey==="undefined")window.savedKey=savedKey;}
+if(typeof type!=="undefined"){window.__dsm_1_type=type;if(typeof window.type==="undefined")window.type=type;}
+if(typeof text!=="undefined"){window.__dsm_1_text=text;if(typeof window.text==="undefined")window.text=text;}
+if(typeof chars!=="undefined"){window.__dsm_1_chars=chars;if(typeof window.chars==="undefined")window.chars=chars;}
+if(typeof words!=="undefined"){window.__dsm_1_words=words;if(typeof window.words==="undefined")window.words=words;}
+if(typeof dropZone!=="undefined"){window.__dsm_1_dropZone=dropZone;if(typeof window.dropZone==="undefined")window.dropZone=dropZone;}
+if(typeof dt!=="undefined"){window.__dsm_1_dt=dt;if(typeof window.dt==="undefined")window.dt=dt;}
+if(typeof files!=="undefined"){window.__dsm_1_files=files;if(typeof window.files==="undefined")window.files=files;}
+if(typeof validFiles!=="undefined"){window.__dsm_1_validFiles=validFiles;if(typeof window.validFiles==="undefined")window.validFiles=validFiles;}
+if(typeof item!=="undefined"){window.__dsm_1_item=item;if(typeof window.item==="undefined")window.item=item;}
+if(typeof isPdf!=="undefined"){window.__dsm_1_isPdf=isPdf;if(typeof window.isPdf==="undefined")window.isPdf=isPdf;}
+if(typeof iconSvg!=="undefined"){window.__dsm_1_iconSvg=iconSvg;if(typeof window.iconSvg==="undefined")window.iconSvg=iconSvg;}
+if(typeof sizeStr!=="undefined"){window.__dsm_1_sizeStr=sizeStr;if(typeof window.sizeStr==="undefined")window.sizeStr=sizeStr;}
+if(typeof apiKey!=="undefined"){window.__dsm_1_apiKey=apiKey;if(typeof window.apiKey==="undefined")window.apiKey=apiKey;}
+if(typeof tasks!=="undefined"){window.__dsm_1_tasks=tasks;if(typeof window.tasks==="undefined")window.tasks=tasks;}
+if(typeof arrayBuffer!=="undefined"){window.__dsm_1_arrayBuffer=arrayBuffer;if(typeof window.arrayBuffer==="undefined")window.arrayBuffer=arrayBuffer;}
+if(typeof pdf!=="undefined"){window.__dsm_1_pdf=pdf;if(typeof window.pdf==="undefined")window.pdf=pdf;}
+if(typeof totalTasks!=="undefined"){window.__dsm_1_totalTasks=totalTasks;if(typeof window.totalTasks==="undefined")window.totalTasks=totalTasks;}
+if(typeof task!=="undefined"){window.__dsm_1_task=task;if(typeof window.task==="undefined")window.task=task;}
+if(typeof currentPct!=="undefined"){window.__dsm_1_currentPct=currentPct;if(typeof window.currentPct==="undefined")window.currentPct=currentPct;}
+if(typeof base64Image!=="undefined"){window.__dsm_1_base64Image=base64Image;if(typeof window.base64Image==="undefined")window.base64Image=base64Image;}
+if(typeof pageText!=="undefined"){window.__dsm_1_pageText=pageText;if(typeof window.pageText==="undefined")window.pageText=pageText;}
+if(typeof page!=="undefined"){window.__dsm_1_page=page;if(typeof window.page==="undefined")window.page=page;}
+if(typeof viewport!=="undefined"){window.__dsm_1_viewport=viewport;if(typeof window.viewport==="undefined")window.viewport=viewport;}
+if(typeof ctx!=="undefined"){window.__dsm_1_ctx=ctx;if(typeof window.ctx==="undefined")window.ctx=ctx;}
+if(typeof reader!=="undefined"){window.__dsm_1_reader=reader;if(typeof window.reader==="undefined")window.reader=reader;}
+if(typeof img!=="undefined"){window.__dsm_1_img=img;if(typeof window.img==="undefined")window.img=img;}
+if(typeof width!=="undefined"){window.__dsm_1_width=width;if(typeof window.width==="undefined")window.width=width;}
+if(typeof height!=="undefined"){window.__dsm_1_height=height;if(typeof window.height==="undefined")window.height=height;}
+if(typeof maxDim!=="undefined"){window.__dsm_1_maxDim=maxDim;if(typeof window.maxDim==="undefined")window.maxDim=maxDim;}
+if(typeof dataUrl!=="undefined"){window.__dsm_1_dataUrl=dataUrl;if(typeof window.dataUrl==="undefined")window.dataUrl=dataUrl;}
+if(typeof systemPrompt!=="undefined"){window.__dsm_1_systemPrompt=systemPrompt;if(typeof window.systemPrompt==="undefined")window.systemPrompt=systemPrompt;}
+if(typeof payload!=="undefined"){window.__dsm_1_payload=payload;if(typeof window.payload==="undefined")window.payload=payload;}
+if(typeof apiUrl!=="undefined"){window.__dsm_1_apiUrl=apiUrl;if(typeof window.apiUrl==="undefined")window.apiUrl=apiUrl;}
+if(typeof retries!=="undefined"){window.__dsm_1_retries=retries;if(typeof window.retries==="undefined")window.retries=retries;}
+if(typeof maxRetries!=="undefined"){window.__dsm_1_maxRetries=maxRetries;if(typeof window.maxRetries==="undefined")window.maxRetries=maxRetries;}
+if(typeof delay!=="undefined"){window.__dsm_1_delay=delay;if(typeof window.delay==="undefined")window.delay=delay;}
+if(typeof response!=="undefined"){window.__dsm_1_response=response;if(typeof window.response==="undefined")window.response=response;}
+if(typeof errData!=="undefined"){window.__dsm_1_errData=errData;if(typeof window.errData==="undefined")window.errData=errData;}
+if(typeof result!=="undefined"){window.__dsm_1_result=result;if(typeof window.result==="undefined")window.result=result;}
+if(typeof textOutput!=="undefined"){window.__dsm_1_textOutput=textOutput;if(typeof window.textOutput==="undefined")window.textOutput=textOutput;}
+if(typeof blob!=="undefined"){window.__dsm_1_blob=blob;if(typeof window.blob==="undefined")window.blob=blob;}
+if(typeof url!=="undefined"){window.__dsm_1_url=url;if(typeof window.url==="undefined")window.url=url;}
+if(typeof a!=="undefined"){window.__dsm_1_a=a;if(typeof window.a==="undefined")window.a=a;}
+if(typeof content!=="undefined"){window.__dsm_1_content=content;if(typeof window.content==="undefined")window.content=content;}
+if(typeof searchStr!=="undefined"){window.__dsm_1_searchStr=searchStr;if(typeof window.searchStr==="undefined")window.searchStr=searchStr;}
+if(typeof replaceStr!=="undefined"){window.__dsm_1_replaceStr=replaceStr;if(typeof window.replaceStr==="undefined")window.replaceStr=replaceStr;}
+if(typeof regex!=="undefined"){window.__dsm_1_regex=regex;if(typeof window.regex==="undefined")window.regex=regex;}
+if(typeof utterance!=="undefined"){window.__dsm_1_utterance=utterance;if(typeof window.utterance==="undefined")window.utterance=utterance;}
+if(typeof toast!=="undefined"){window.__dsm_1_toast=toast;if(typeof window.toast==="undefined")window.toast=toast;}
+if(typeof toastMessage!=="undefined"){window.__dsm_1_toastMessage=toastMessage;if(typeof window.toastMessage==="undefined")window.toastMessage=toastMessage;}
+if(typeof toastIcon!=="undefined"){window.__dsm_1_toastIcon=toastIcon;if(typeof window.toastIcon==="undefined")window.toastIcon=toastIcon;}
+if(typeof window.onload==="function"&&window.onload!==__dsmPrevOnload){var __dsmFn=window.onload;window.onload=__dsmPrevOnload;window.addEventListener("load",__dsmFn);}
+}catch(e){console.warn("Module 1 script error:",e);}
+})();
+
+</script>
+
+<script>
+(function(){
+try{
+var __dsmRealDoc=window.document;
+var __dsmScope=__dsmRealDoc.querySelector('[data-single-merge-doc="1"]');
+var __dsmPrevOnload=window.onload;
+var document=new Proxy(__dsmRealDoc,{
+get:function(t,prop){
+if(prop==="getElementById"){return function(id){try{if(__dsmScope){var all=__dsmScope.querySelectorAll("[id]");for(var i=0;i<all.length;i++){if(all[i].id===String(id))return all[i];}}}catch(e){}return t.getElementById(id);};}
+if(prop==="querySelector"){return function(sel){try{if(__dsmScope){var el=__dsmScope.querySelector(sel);if(el)return el;}}catch(e){}return t.querySelector(sel);};}
+if(prop==="querySelectorAll"){return function(sel){try{if(__dsmScope){var els=__dsmScope.querySelectorAll(sel);if(els&&els.length)return els;}}catch(e){}return t.querySelectorAll(sel);};}
+if(prop==="getElementsByClassName"){return function(cls){try{if(__dsmScope){var els=__dsmScope.getElementsByClassName(cls);if(els&&els.length)return els;}}catch(e){}return t.getElementsByClassName(cls);};}
+if(prop==="getElementsByTagName"){return function(tag){try{if(__dsmScope){var els=__dsmScope.getElementsByTagName(tag);if(els&&els.length)return els;}}catch(e){}return t.getElementsByTagName(tag);};}
+var v=t[prop];return (typeof v==="function")?v.bind(t):v;
+},
+set:function(t,prop,val){t[prop]=val;return true;},
+has:function(t,prop){return prop in t;}
+});
+
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    
+if(typeof updateStats!=="undefined"){window.__dsm_1_updateStats=updateStats;if(typeof window.updateStats==="undefined")window.updateStats=updateStats;}
+if(typeof preventDefaults!=="undefined"){window.__dsm_1_preventDefaults=preventDefaults;if(typeof window.preventDefaults==="undefined")window.preventDefaults=preventDefaults;}
+if(typeof handleFilesAdded!=="undefined"){window.__dsm_1_handleFilesAdded=handleFilesAdded;if(typeof window.handleFilesAdded==="undefined")window.handleFilesAdded=handleFilesAdded;}
+if(typeof renderFileQueue!=="undefined"){window.__dsm_1_renderFileQueue=renderFileQueue;if(typeof window.renderFileQueue==="undefined")window.renderFileQueue=renderFileQueue;}
+if(typeof removeFile!=="undefined"){window.__dsm_1_removeFile=removeFile;if(typeof window.removeFile==="undefined")window.removeFile=removeFile;}
+if(typeof clearFiles!=="undefined"){window.__dsm_1_clearFiles=clearFiles;if(typeof window.clearFiles==="undefined")window.clearFiles=clearFiles;}
+if(typeof startExtraction!=="undefined"){window.__dsm_1_startExtraction=startExtraction;if(typeof window.startExtraction==="undefined")window.startExtraction=startExtraction;}
+if(typeof renderPdfPageToBase64!=="undefined"){window.__dsm_1_renderPdfPageToBase64=renderPdfPageToBase64;if(typeof window.renderPdfPageToBase64==="undefined")window.renderPdfPageToBase64=renderPdfPageToBase64;}
+if(typeof renderImageFileToBase64!=="undefined"){window.__dsm_1_renderImageFileToBase64=renderImageFileToBase64;if(typeof window.renderImageFileToBase64==="undefined")window.renderImageFileToBase64=renderImageFileToBase64;}
+if(typeof callGeminiVisionApi!=="undefined"){window.__dsm_1_callGeminiVisionApi=callGeminiVisionApi;if(typeof window.callGeminiVisionApi==="undefined")window.callGeminiVisionApi=callGeminiVisionApi;}
+if(typeof downloadText!=="undefined"){window.__dsm_1_downloadText=downloadText;if(typeof window.downloadText==="undefined")window.downloadText=downloadText;}
+if(typeof downloadDocx!=="undefined"){window.__dsm_1_downloadDocx=downloadDocx;if(typeof window.downloadDocx==="undefined")window.downloadDocx=downloadDocx;}
+if(typeof copyToClipboard!=="undefined"){window.__dsm_1_copyToClipboard=copyToClipboard;if(typeof window.copyToClipboard==="undefined")window.copyToClipboard=copyToClipboard;}
+if(typeof replaceText!=="undefined"){window.__dsm_1_replaceText=replaceText;if(typeof window.replaceText==="undefined")window.replaceText=replaceText;}
+if(typeof speakText!=="undefined"){window.__dsm_1_speakText=speakText;if(typeof window.speakText==="undefined")window.speakText=speakText;}
+if(typeof clearAll!=="undefined"){window.__dsm_1_clearAll=clearAll;if(typeof window.clearAll==="undefined")window.clearAll=clearAll;}
+if(typeof showToast!=="undefined"){window.__dsm_1_showToast=showToast;if(typeof window.showToast==="undefined")window.showToast=showToast;}
+if(typeof apiKeyInput!=="undefined"){window.__dsm_1_apiKeyInput=apiKeyInput;if(typeof window.apiKeyInput==="undefined")window.apiKeyInput=apiKeyInput;}
+if(typeof toggleKeyBtn!=="undefined"){window.__dsm_1_toggleKeyBtn=toggleKeyBtn;if(typeof window.toggleKeyBtn==="undefined")window.toggleKeyBtn=toggleKeyBtn;}
+if(typeof fileInput!=="undefined"){window.__dsm_1_fileInput=fileInput;if(typeof window.fileInput==="undefined")window.fileInput=fileInput;}
+if(typeof fileQueueCard!=="undefined"){window.__dsm_1_fileQueueCard=fileQueueCard;if(typeof window.fileQueueCard==="undefined")window.fileQueueCard=fileQueueCard;}
+if(typeof fileList!=="undefined"){window.__dsm_1_fileList=fileList;if(typeof window.fileList==="undefined")window.fileList=fileList;}
+if(typeof fileCount!=="undefined"){window.__dsm_1_fileCount=fileCount;if(typeof window.fileCount==="undefined")window.fileCount=fileCount;}
+if(typeof statusContainer!=="undefined"){window.__dsm_1_statusContainer=statusContainer;if(typeof window.statusContainer==="undefined")window.statusContainer=statusContainer;}
+if(typeof statusText!=="undefined"){window.__dsm_1_statusText=statusText;if(typeof window.statusText==="undefined")window.statusText=statusText;}
+if(typeof progressBar!=="undefined"){window.__dsm_1_progressBar=progressBar;if(typeof window.progressBar==="undefined")window.progressBar=progressBar;}
+if(typeof progressPercentage!=="undefined"){window.__dsm_1_progressPercentage=progressPercentage;if(typeof window.progressPercentage==="undefined")window.progressPercentage=progressPercentage;}
+if(typeof outputText!=="undefined"){window.__dsm_1_outputText=outputText;if(typeof window.outputText==="undefined")window.outputText=outputText;}
+if(typeof downloadTxtBtn!=="undefined"){window.__dsm_1_downloadTxtBtn=downloadTxtBtn;if(typeof window.downloadTxtBtn==="undefined")window.downloadTxtBtn=downloadTxtBtn;}
+if(typeof downloadDocBtn!=="undefined"){window.__dsm_1_downloadDocBtn=downloadDocBtn;if(typeof window.downloadDocBtn==="undefined")window.downloadDocBtn=downloadDocBtn;}
+if(typeof canvas!=="undefined"){window.__dsm_1_canvas=canvas;if(typeof window.canvas==="undefined")window.canvas=canvas;}
+if(typeof statWords!=="undefined"){window.__dsm_1_statWords=statWords;if(typeof window.statWords==="undefined")window.statWords=statWords;}
+if(typeof statChars!=="undefined"){window.__dsm_1_statChars=statChars;if(typeof window.statChars==="undefined")window.statChars=statChars;}
+if(typeof selectedFiles!=="undefined"){window.__dsm_1_selectedFiles=selectedFiles;if(typeof window.selectedFiles==="undefined")window.selectedFiles=selectedFiles;}
+if(typeof extractedContent!=="undefined"){window.__dsm_1_extractedContent=extractedContent;if(typeof window.extractedContent==="undefined")window.extractedContent=extractedContent;}
+if(typeof DEFAULT_API_KEY!=="undefined"){window.__dsm_1_DEFAULT_API_KEY=DEFAULT_API_KEY;if(typeof window.DEFAULT_API_KEY==="undefined")window.DEFAULT_API_KEY=DEFAULT_API_KEY;}
+if(typeof savedKey!=="undefined"){window.__dsm_1_savedKey=savedKey;if(typeof window.savedKey==="undefined")window.savedKey=savedKey;}
+if(typeof type!=="undefined"){window.__dsm_1_type=type;if(typeof window.type==="undefined")window.type=type;}
+if(typeof text!=="undefined"){window.__dsm_1_text=text;if(typeof window.text==="undefined")window.text=text;}
+if(typeof chars!=="undefined"){window.__dsm_1_chars=chars;if(typeof window.chars==="undefined")window.chars=chars;}
+if(typeof words!=="undefined"){window.__dsm_1_words=words;if(typeof window.words==="undefined")window.words=words;}
+if(typeof dropZone!=="undefined"){window.__dsm_1_dropZone=dropZone;if(typeof window.dropZone==="undefined")window.dropZone=dropZone;}
+if(typeof dt!=="undefined"){window.__dsm_1_dt=dt;if(typeof window.dt==="undefined")window.dt=dt;}
+if(typeof files!=="undefined"){window.__dsm_1_files=files;if(typeof window.files==="undefined")window.files=files;}
+if(typeof validFiles!=="undefined"){window.__dsm_1_validFiles=validFiles;if(typeof window.validFiles==="undefined")window.validFiles=validFiles;}
+if(typeof item!=="undefined"){window.__dsm_1_item=item;if(typeof window.item==="undefined")window.item=item;}
+if(typeof isPdf!=="undefined"){window.__dsm_1_isPdf=isPdf;if(typeof window.isPdf==="undefined")window.isPdf=isPdf;}
+if(typeof iconSvg!=="undefined"){window.__dsm_1_iconSvg=iconSvg;if(typeof window.iconSvg==="undefined")window.iconSvg=iconSvg;}
+if(typeof sizeStr!=="undefined"){window.__dsm_1_sizeStr=sizeStr;if(typeof window.sizeStr==="undefined")window.sizeStr=sizeStr;}
+if(typeof apiKey!=="undefined"){window.__dsm_1_apiKey=apiKey;if(typeof window.apiKey==="undefined")window.apiKey=apiKey;}
+if(typeof tasks!=="undefined"){window.__dsm_1_tasks=tasks;if(typeof window.tasks==="undefined")window.tasks=tasks;}
+if(typeof arrayBuffer!=="undefined"){window.__dsm_1_arrayBuffer=arrayBuffer;if(typeof window.arrayBuffer==="undefined")window.arrayBuffer=arrayBuffer;}
+if(typeof pdf!=="undefined"){window.__dsm_1_pdf=pdf;if(typeof window.pdf==="undefined")window.pdf=pdf;}
+if(typeof totalTasks!=="undefined"){window.__dsm_1_totalTasks=totalTasks;if(typeof window.totalTasks==="undefined")window.totalTasks=totalTasks;}
+if(typeof task!=="undefined"){window.__dsm_1_task=task;if(typeof window.task==="undefined")window.task=task;}
+if(typeof currentPct!=="undefined"){window.__dsm_1_currentPct=currentPct;if(typeof window.currentPct==="undefined")window.currentPct=currentPct;}
+if(typeof base64Image!=="undefined"){window.__dsm_1_base64Image=base64Image;if(typeof window.base64Image==="undefined")window.base64Image=base64Image;}
+if(typeof pageText!=="undefined"){window.__dsm_1_pageText=pageText;if(typeof window.pageText==="undefined")window.pageText=pageText;}
+if(typeof page!=="undefined"){window.__dsm_1_page=page;if(typeof window.page==="undefined")window.page=page;}
+if(typeof viewport!=="undefined"){window.__dsm_1_viewport=viewport;if(typeof window.viewport==="undefined")window.viewport=viewport;}
+if(typeof ctx!=="undefined"){window.__dsm_1_ctx=ctx;if(typeof window.ctx==="undefined")window.ctx=ctx;}
+if(typeof reader!=="undefined"){window.__dsm_1_reader=reader;if(typeof window.reader==="undefined")window.reader=reader;}
+if(typeof img!=="undefined"){window.__dsm_1_img=img;if(typeof window.img==="undefined")window.img=img;}
+if(typeof width!=="undefined"){window.__dsm_1_width=width;if(typeof window.width==="undefined")window.width=width;}
+if(typeof height!=="undefined"){window.__dsm_1_height=height;if(typeof window.height==="undefined")window.height=height;}
+if(typeof maxDim!=="undefined"){window.__dsm_1_maxDim=maxDim;if(typeof window.maxDim==="undefined")window.maxDim=maxDim;}
+if(typeof dataUrl!=="undefined"){window.__dsm_1_dataUrl=dataUrl;if(typeof window.dataUrl==="undefined")window.dataUrl=dataUrl;}
+if(typeof systemPrompt!=="undefined"){window.__dsm_1_systemPrompt=systemPrompt;if(typeof window.systemPrompt==="undefined")window.systemPrompt=systemPrompt;}
+if(typeof payload!=="undefined"){window.__dsm_1_payload=payload;if(typeof window.payload==="undefined")window.payload=payload;}
+if(typeof apiUrl!=="undefined"){window.__dsm_1_apiUrl=apiUrl;if(typeof window.apiUrl==="undefined")window.apiUrl=apiUrl;}
+if(typeof retries!=="undefined"){window.__dsm_1_retries=retries;if(typeof window.retries==="undefined")window.retries=retries;}
+if(typeof maxRetries!=="undefined"){window.__dsm_1_maxRetries=maxRetries;if(typeof window.maxRetries==="undefined")window.maxRetries=maxRetries;}
+if(typeof delay!=="undefined"){window.__dsm_1_delay=delay;if(typeof window.delay==="undefined")window.delay=delay;}
+if(typeof response!=="undefined"){window.__dsm_1_response=response;if(typeof window.response==="undefined")window.response=response;}
+if(typeof errData!=="undefined"){window.__dsm_1_errData=errData;if(typeof window.errData==="undefined")window.errData=errData;}
+if(typeof result!=="undefined"){window.__dsm_1_result=result;if(typeof window.result==="undefined")window.result=result;}
+if(typeof textOutput!=="undefined"){window.__dsm_1_textOutput=textOutput;if(typeof window.textOutput==="undefined")window.textOutput=textOutput;}
+if(typeof blob!=="undefined"){window.__dsm_1_blob=blob;if(typeof window.blob==="undefined")window.blob=blob;}
+if(typeof url!=="undefined"){window.__dsm_1_url=url;if(typeof window.url==="undefined")window.url=url;}
+if(typeof a!=="undefined"){window.__dsm_1_a=a;if(typeof window.a==="undefined")window.a=a;}
+if(typeof content!=="undefined"){window.__dsm_1_content=content;if(typeof window.content==="undefined")window.content=content;}
+if(typeof searchStr!=="undefined"){window.__dsm_1_searchStr=searchStr;if(typeof window.searchStr==="undefined")window.searchStr=searchStr;}
+if(typeof replaceStr!=="undefined"){window.__dsm_1_replaceStr=replaceStr;if(typeof window.replaceStr==="undefined")window.replaceStr=replaceStr;}
+if(typeof regex!=="undefined"){window.__dsm_1_regex=regex;if(typeof window.regex==="undefined")window.regex=regex;}
+if(typeof utterance!=="undefined"){window.__dsm_1_utterance=utterance;if(typeof window.utterance==="undefined")window.utterance=utterance;}
+if(typeof toast!=="undefined"){window.__dsm_1_toast=toast;if(typeof window.toast==="undefined")window.toast=toast;}
+if(typeof toastMessage!=="undefined"){window.__dsm_1_toastMessage=toastMessage;if(typeof window.toastMessage==="undefined")window.toastMessage=toastMessage;}
+if(typeof toastIcon!=="undefined"){window.__dsm_1_toastIcon=toastIcon;if(typeof window.toastIcon==="undefined")window.toastIcon=toastIcon;}
+if(typeof window.onload==="function"&&window.onload!==__dsmPrevOnload){var __dsmFn=window.onload;window.onload=__dsmPrevOnload;window.addEventListener("load",__dsmFn);}
+}catch(e){console.warn("Module 1 script error:",e);}
+})();
+
+</script>
+
+<script>
+(function(){
+try{
+var __dsmRealDoc=window.document;
+var __dsmScope=__dsmRealDoc.querySelector('[data-single-merge-doc="1"]');
+var __dsmPrevOnload=window.onload;
+var document=new Proxy(__dsmRealDoc,{
+get:function(t,prop){
+if(prop==="getElementById"){return function(id){try{if(__dsmScope){var all=__dsmScope.querySelectorAll("[id]");for(var i=0;i<all.length;i++){if(all[i].id===String(id))return all[i];}}}catch(e){}return t.getElementById(id);};}
+if(prop==="querySelector"){return function(sel){try{if(__dsmScope){var el=__dsmScope.querySelector(sel);if(el)return el;}}catch(e){}return t.querySelector(sel);};}
+if(prop==="querySelectorAll"){return function(sel){try{if(__dsmScope){var els=__dsmScope.querySelectorAll(sel);if(els&&els.length)return els;}}catch(e){}return t.querySelectorAll(sel);};}
+if(prop==="getElementsByClassName"){return function(cls){try{if(__dsmScope){var els=__dsmScope.getElementsByClassName(cls);if(els&&els.length)return els;}}catch(e){}return t.getElementsByClassName(cls);};}
+if(prop==="getElementsByTagName"){return function(tag){try{if(__dsmScope){var els=__dsmScope.getElementsByTagName(tag);if(els&&els.length)return els;}}catch(e){}return t.getElementsByTagName(tag);};}
+var v=t[prop];return (typeof v==="function")?v.bind(t):v;
+},
+set:function(t,prop,val){t[prop]=val;return true;},
+has:function(t,prop){return prop in t;}
+});
+
         // DOM References
         const apiKeyInput = document.getElementById('api-key');
         const toggleKeyBtn = document.getElementById('toggle-key-btn');
@@ -735,6 +1258,629 @@ CRITICAL INSTRUCTIONS:
                 toast.classList.add('translate-y-20', 'opacity-0');
             }, 3000);
         }
-    </script>
+    
+if(typeof updateStats!=="undefined"){window.__dsm_1_updateStats=updateStats;if(typeof window.updateStats==="undefined")window.updateStats=updateStats;}
+if(typeof preventDefaults!=="undefined"){window.__dsm_1_preventDefaults=preventDefaults;if(typeof window.preventDefaults==="undefined")window.preventDefaults=preventDefaults;}
+if(typeof handleFilesAdded!=="undefined"){window.__dsm_1_handleFilesAdded=handleFilesAdded;if(typeof window.handleFilesAdded==="undefined")window.handleFilesAdded=handleFilesAdded;}
+if(typeof renderFileQueue!=="undefined"){window.__dsm_1_renderFileQueue=renderFileQueue;if(typeof window.renderFileQueue==="undefined")window.renderFileQueue=renderFileQueue;}
+if(typeof removeFile!=="undefined"){window.__dsm_1_removeFile=removeFile;if(typeof window.removeFile==="undefined")window.removeFile=removeFile;}
+if(typeof clearFiles!=="undefined"){window.__dsm_1_clearFiles=clearFiles;if(typeof window.clearFiles==="undefined")window.clearFiles=clearFiles;}
+if(typeof startExtraction!=="undefined"){window.__dsm_1_startExtraction=startExtraction;if(typeof window.startExtraction==="undefined")window.startExtraction=startExtraction;}
+if(typeof renderPdfPageToBase64!=="undefined"){window.__dsm_1_renderPdfPageToBase64=renderPdfPageToBase64;if(typeof window.renderPdfPageToBase64==="undefined")window.renderPdfPageToBase64=renderPdfPageToBase64;}
+if(typeof renderImageFileToBase64!=="undefined"){window.__dsm_1_renderImageFileToBase64=renderImageFileToBase64;if(typeof window.renderImageFileToBase64==="undefined")window.renderImageFileToBase64=renderImageFileToBase64;}
+if(typeof callGeminiVisionApi!=="undefined"){window.__dsm_1_callGeminiVisionApi=callGeminiVisionApi;if(typeof window.callGeminiVisionApi==="undefined")window.callGeminiVisionApi=callGeminiVisionApi;}
+if(typeof downloadText!=="undefined"){window.__dsm_1_downloadText=downloadText;if(typeof window.downloadText==="undefined")window.downloadText=downloadText;}
+if(typeof downloadDocx!=="undefined"){window.__dsm_1_downloadDocx=downloadDocx;if(typeof window.downloadDocx==="undefined")window.downloadDocx=downloadDocx;}
+if(typeof copyToClipboard!=="undefined"){window.__dsm_1_copyToClipboard=copyToClipboard;if(typeof window.copyToClipboard==="undefined")window.copyToClipboard=copyToClipboard;}
+if(typeof replaceText!=="undefined"){window.__dsm_1_replaceText=replaceText;if(typeof window.replaceText==="undefined")window.replaceText=replaceText;}
+if(typeof speakText!=="undefined"){window.__dsm_1_speakText=speakText;if(typeof window.speakText==="undefined")window.speakText=speakText;}
+if(typeof clearAll!=="undefined"){window.__dsm_1_clearAll=clearAll;if(typeof window.clearAll==="undefined")window.clearAll=clearAll;}
+if(typeof showToast!=="undefined"){window.__dsm_1_showToast=showToast;if(typeof window.showToast==="undefined")window.showToast=showToast;}
+if(typeof apiKeyInput!=="undefined"){window.__dsm_1_apiKeyInput=apiKeyInput;if(typeof window.apiKeyInput==="undefined")window.apiKeyInput=apiKeyInput;}
+if(typeof toggleKeyBtn!=="undefined"){window.__dsm_1_toggleKeyBtn=toggleKeyBtn;if(typeof window.toggleKeyBtn==="undefined")window.toggleKeyBtn=toggleKeyBtn;}
+if(typeof fileInput!=="undefined"){window.__dsm_1_fileInput=fileInput;if(typeof window.fileInput==="undefined")window.fileInput=fileInput;}
+if(typeof fileQueueCard!=="undefined"){window.__dsm_1_fileQueueCard=fileQueueCard;if(typeof window.fileQueueCard==="undefined")window.fileQueueCard=fileQueueCard;}
+if(typeof fileList!=="undefined"){window.__dsm_1_fileList=fileList;if(typeof window.fileList==="undefined")window.fileList=fileList;}
+if(typeof fileCount!=="undefined"){window.__dsm_1_fileCount=fileCount;if(typeof window.fileCount==="undefined")window.fileCount=fileCount;}
+if(typeof statusContainer!=="undefined"){window.__dsm_1_statusContainer=statusContainer;if(typeof window.statusContainer==="undefined")window.statusContainer=statusContainer;}
+if(typeof statusText!=="undefined"){window.__dsm_1_statusText=statusText;if(typeof window.statusText==="undefined")window.statusText=statusText;}
+if(typeof progressBar!=="undefined"){window.__dsm_1_progressBar=progressBar;if(typeof window.progressBar==="undefined")window.progressBar=progressBar;}
+if(typeof progressPercentage!=="undefined"){window.__dsm_1_progressPercentage=progressPercentage;if(typeof window.progressPercentage==="undefined")window.progressPercentage=progressPercentage;}
+if(typeof outputText!=="undefined"){window.__dsm_1_outputText=outputText;if(typeof window.outputText==="undefined")window.outputText=outputText;}
+if(typeof downloadTxtBtn!=="undefined"){window.__dsm_1_downloadTxtBtn=downloadTxtBtn;if(typeof window.downloadTxtBtn==="undefined")window.downloadTxtBtn=downloadTxtBtn;}
+if(typeof downloadDocBtn!=="undefined"){window.__dsm_1_downloadDocBtn=downloadDocBtn;if(typeof window.downloadDocBtn==="undefined")window.downloadDocBtn=downloadDocBtn;}
+if(typeof canvas!=="undefined"){window.__dsm_1_canvas=canvas;if(typeof window.canvas==="undefined")window.canvas=canvas;}
+if(typeof statWords!=="undefined"){window.__dsm_1_statWords=statWords;if(typeof window.statWords==="undefined")window.statWords=statWords;}
+if(typeof statChars!=="undefined"){window.__dsm_1_statChars=statChars;if(typeof window.statChars==="undefined")window.statChars=statChars;}
+if(typeof selectedFiles!=="undefined"){window.__dsm_1_selectedFiles=selectedFiles;if(typeof window.selectedFiles==="undefined")window.selectedFiles=selectedFiles;}
+if(typeof extractedContent!=="undefined"){window.__dsm_1_extractedContent=extractedContent;if(typeof window.extractedContent==="undefined")window.extractedContent=extractedContent;}
+if(typeof DEFAULT_API_KEY!=="undefined"){window.__dsm_1_DEFAULT_API_KEY=DEFAULT_API_KEY;if(typeof window.DEFAULT_API_KEY==="undefined")window.DEFAULT_API_KEY=DEFAULT_API_KEY;}
+if(typeof savedKey!=="undefined"){window.__dsm_1_savedKey=savedKey;if(typeof window.savedKey==="undefined")window.savedKey=savedKey;}
+if(typeof type!=="undefined"){window.__dsm_1_type=type;if(typeof window.type==="undefined")window.type=type;}
+if(typeof text!=="undefined"){window.__dsm_1_text=text;if(typeof window.text==="undefined")window.text=text;}
+if(typeof chars!=="undefined"){window.__dsm_1_chars=chars;if(typeof window.chars==="undefined")window.chars=chars;}
+if(typeof words!=="undefined"){window.__dsm_1_words=words;if(typeof window.words==="undefined")window.words=words;}
+if(typeof dropZone!=="undefined"){window.__dsm_1_dropZone=dropZone;if(typeof window.dropZone==="undefined")window.dropZone=dropZone;}
+if(typeof dt!=="undefined"){window.__dsm_1_dt=dt;if(typeof window.dt==="undefined")window.dt=dt;}
+if(typeof files!=="undefined"){window.__dsm_1_files=files;if(typeof window.files==="undefined")window.files=files;}
+if(typeof validFiles!=="undefined"){window.__dsm_1_validFiles=validFiles;if(typeof window.validFiles==="undefined")window.validFiles=validFiles;}
+if(typeof item!=="undefined"){window.__dsm_1_item=item;if(typeof window.item==="undefined")window.item=item;}
+if(typeof isPdf!=="undefined"){window.__dsm_1_isPdf=isPdf;if(typeof window.isPdf==="undefined")window.isPdf=isPdf;}
+if(typeof iconSvg!=="undefined"){window.__dsm_1_iconSvg=iconSvg;if(typeof window.iconSvg==="undefined")window.iconSvg=iconSvg;}
+if(typeof sizeStr!=="undefined"){window.__dsm_1_sizeStr=sizeStr;if(typeof window.sizeStr==="undefined")window.sizeStr=sizeStr;}
+if(typeof apiKey!=="undefined"){window.__dsm_1_apiKey=apiKey;if(typeof window.apiKey==="undefined")window.apiKey=apiKey;}
+if(typeof tasks!=="undefined"){window.__dsm_1_tasks=tasks;if(typeof window.tasks==="undefined")window.tasks=tasks;}
+if(typeof arrayBuffer!=="undefined"){window.__dsm_1_arrayBuffer=arrayBuffer;if(typeof window.arrayBuffer==="undefined")window.arrayBuffer=arrayBuffer;}
+if(typeof pdf!=="undefined"){window.__dsm_1_pdf=pdf;if(typeof window.pdf==="undefined")window.pdf=pdf;}
+if(typeof totalTasks!=="undefined"){window.__dsm_1_totalTasks=totalTasks;if(typeof window.totalTasks==="undefined")window.totalTasks=totalTasks;}
+if(typeof task!=="undefined"){window.__dsm_1_task=task;if(typeof window.task==="undefined")window.task=task;}
+if(typeof currentPct!=="undefined"){window.__dsm_1_currentPct=currentPct;if(typeof window.currentPct==="undefined")window.currentPct=currentPct;}
+if(typeof base64Image!=="undefined"){window.__dsm_1_base64Image=base64Image;if(typeof window.base64Image==="undefined")window.base64Image=base64Image;}
+if(typeof pageText!=="undefined"){window.__dsm_1_pageText=pageText;if(typeof window.pageText==="undefined")window.pageText=pageText;}
+if(typeof page!=="undefined"){window.__dsm_1_page=page;if(typeof window.page==="undefined")window.page=page;}
+if(typeof viewport!=="undefined"){window.__dsm_1_viewport=viewport;if(typeof window.viewport==="undefined")window.viewport=viewport;}
+if(typeof ctx!=="undefined"){window.__dsm_1_ctx=ctx;if(typeof window.ctx==="undefined")window.ctx=ctx;}
+if(typeof reader!=="undefined"){window.__dsm_1_reader=reader;if(typeof window.reader==="undefined")window.reader=reader;}
+if(typeof img!=="undefined"){window.__dsm_1_img=img;if(typeof window.img==="undefined")window.img=img;}
+if(typeof width!=="undefined"){window.__dsm_1_width=width;if(typeof window.width==="undefined")window.width=width;}
+if(typeof height!=="undefined"){window.__dsm_1_height=height;if(typeof window.height==="undefined")window.height=height;}
+if(typeof maxDim!=="undefined"){window.__dsm_1_maxDim=maxDim;if(typeof window.maxDim==="undefined")window.maxDim=maxDim;}
+if(typeof dataUrl!=="undefined"){window.__dsm_1_dataUrl=dataUrl;if(typeof window.dataUrl==="undefined")window.dataUrl=dataUrl;}
+if(typeof systemPrompt!=="undefined"){window.__dsm_1_systemPrompt=systemPrompt;if(typeof window.systemPrompt==="undefined")window.systemPrompt=systemPrompt;}
+if(typeof payload!=="undefined"){window.__dsm_1_payload=payload;if(typeof window.payload==="undefined")window.payload=payload;}
+if(typeof apiUrl!=="undefined"){window.__dsm_1_apiUrl=apiUrl;if(typeof window.apiUrl==="undefined")window.apiUrl=apiUrl;}
+if(typeof retries!=="undefined"){window.__dsm_1_retries=retries;if(typeof window.retries==="undefined")window.retries=retries;}
+if(typeof maxRetries!=="undefined"){window.__dsm_1_maxRetries=maxRetries;if(typeof window.maxRetries==="undefined")window.maxRetries=maxRetries;}
+if(typeof delay!=="undefined"){window.__dsm_1_delay=delay;if(typeof window.delay==="undefined")window.delay=delay;}
+if(typeof response!=="undefined"){window.__dsm_1_response=response;if(typeof window.response==="undefined")window.response=response;}
+if(typeof errData!=="undefined"){window.__dsm_1_errData=errData;if(typeof window.errData==="undefined")window.errData=errData;}
+if(typeof result!=="undefined"){window.__dsm_1_result=result;if(typeof window.result==="undefined")window.result=result;}
+if(typeof textOutput!=="undefined"){window.__dsm_1_textOutput=textOutput;if(typeof window.textOutput==="undefined")window.textOutput=textOutput;}
+if(typeof blob!=="undefined"){window.__dsm_1_blob=blob;if(typeof window.blob==="undefined")window.blob=blob;}
+if(typeof url!=="undefined"){window.__dsm_1_url=url;if(typeof window.url==="undefined")window.url=url;}
+if(typeof a!=="undefined"){window.__dsm_1_a=a;if(typeof window.a==="undefined")window.a=a;}
+if(typeof content!=="undefined"){window.__dsm_1_content=content;if(typeof window.content==="undefined")window.content=content;}
+if(typeof searchStr!=="undefined"){window.__dsm_1_searchStr=searchStr;if(typeof window.searchStr==="undefined")window.searchStr=searchStr;}
+if(typeof replaceStr!=="undefined"){window.__dsm_1_replaceStr=replaceStr;if(typeof window.replaceStr==="undefined")window.replaceStr=replaceStr;}
+if(typeof regex!=="undefined"){window.__dsm_1_regex=regex;if(typeof window.regex==="undefined")window.regex=regex;}
+if(typeof utterance!=="undefined"){window.__dsm_1_utterance=utterance;if(typeof window.utterance==="undefined")window.utterance=utterance;}
+if(typeof toast!=="undefined"){window.__dsm_1_toast=toast;if(typeof window.toast==="undefined")window.toast=toast;}
+if(typeof toastMessage!=="undefined"){window.__dsm_1_toastMessage=toastMessage;if(typeof window.toastMessage==="undefined")window.toastMessage=toastMessage;}
+if(typeof toastIcon!=="undefined"){window.__dsm_1_toastIcon=toastIcon;if(typeof window.toastIcon==="undefined")window.toastIcon=toastIcon;}
+if(typeof window.onload==="function"&&window.onload!==__dsmPrevOnload){var __dsmFn=window.onload;window.onload=__dsmPrevOnload;window.addEventListener("load",__dsmFn);}
+}catch(e){console.warn("Module 1 script error:",e);}
+})();
+
+</script>
+
+<script>
+(function(){
+try{
+var __dsmRealDoc=window.document;
+var __dsmScope=__dsmRealDoc.querySelector('[data-single-merge-doc="2"]');
+var __dsmPrevOnload=window.onload;
+var document=new Proxy(__dsmRealDoc,{
+get:function(t,prop){
+if(prop==="getElementById"){return function(id){try{if(__dsmScope){var all=__dsmScope.querySelectorAll("[id]");for(var i=0;i<all.length;i++){if(all[i].id===String(id))return all[i];}}}catch(e){}return t.getElementById(id);};}
+if(prop==="querySelector"){return function(sel){try{if(__dsmScope){var el=__dsmScope.querySelector(sel);if(el)return el;}}catch(e){}return t.querySelector(sel);};}
+if(prop==="querySelectorAll"){return function(sel){try{if(__dsmScope){var els=__dsmScope.querySelectorAll(sel);if(els&&els.length)return els;}}catch(e){}return t.querySelectorAll(sel);};}
+if(prop==="getElementsByClassName"){return function(cls){try{if(__dsmScope){var els=__dsmScope.getElementsByClassName(cls);if(els&&els.length)return els;}}catch(e){}return t.getElementsByClassName(cls);};}
+if(prop==="getElementsByTagName"){return function(tag){try{if(__dsmScope){var els=__dsmScope.getElementsByTagName(tag);if(els&&els.length)return els;}}catch(e){}return t.getElementsByTagName(tag);};}
+var v=t[prop];return (typeof v==="function")?v.bind(t):v;
+},
+set:function(t,prop,val){t[prop]=val;return true;},
+has:function(t,prop){return prop in t;}
+});
+
+        // Use an array to store the File objects in the order they were selected/added
+        let selectedFiles = [];
+        const fileInput = document.getElementById('pdf-file-input');
+        const fileList = document.getElementById('file-list_m2_2');
+        const fileCountSpan = document.getElementById('file-count_m2_2');
+        const mergeButton = document.getElementById('merge-button');
+        const statusMessage = document.getElementById('status-message');
+
+        /**
+         * Updates the UI to reflect the current list of selected files.
+         */
+        function updateFileListUI() {
+            fileList.innerHTML = ''; // Clear existing list
+            
+            if (selectedFiles.length === 0) {
+                fileList.innerHTML = '<li id="file-placeholder" class="text-gray-500 dark:text-gray-400 text-center py-4">No PDF files selected yet.</li>';
+                fileCountSpan.textContent = '0';
+                mergeButton.disabled = true;
+                return;
+            }
+
+            selectedFiles.forEach((file, index) => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('flex', 'justify-between', 'items-center', 'bg-gray-50', 'dark:bg-gray-700', 'p-3', 'rounded-lg', 'shadow-sm', 'border', 'border-gray-200', 'dark:border-gray-600');
+                
+                // File name and size display
+                const fileDetails = document.createElement('span');
+                fileDetails.classList.add('flex-grow', 'truncate');
+                const fileSize = (file.size / (1024 * 1024)).toFixed(2); // Size in MB
+                fileDetails.innerHTML = `<span class="font-medium text-gray-800 dark:text-gray-200 mr-2">${index + 1}. ${file.name}</span>
+                                         <span class="text-sm text-gray-500 dark:text-gray-400">(${fileSize} MB)</span>`;
+                
+                // Remove button
+                const removeButton = document.createElement('button');
+                removeButton.innerHTML = `<svg class="w-5 h-5 text-red-500 hover:text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>`;
+                removeButton.title = `Remove ${file.name}`;
+                removeButton.onclick = () => removeFile(index);
+
+                listItem.appendChild(fileDetails);
+                listItem.appendChild(removeButton);
+                fileList.appendChild(listItem);
+            });
+            
+            fileCountSpan.textContent = selectedFiles.length;
+            mergeButton.disabled = selectedFiles.length < 2; // Need at least 2 files to merge
+        }
+
+        /**
+         * Handles the file input change event.
+         * @param {Event} event - The file input event.
+         */
+        function handleFileSelect(event) {
+            const files = Array.from(event.target.files).filter(file => file.type === 'application/pdf');
+            
+            // Add new files to the existing array
+            selectedFiles = selectedFiles.concat(files);
+            
+            // Clear the file input value so the change event fires again if the same file is selected later
+            fileInput.value = ''; 
+            
+            updateFileListUI();
+        }
+
+        /**
+         * Removes a file from the selectedFiles array by index.
+         * @param {number} index - The index of the file to remove.
+         */
+        function removeFile(index) {
+            selectedFiles.splice(index, 1);
+            updateFileListUI();
+        }
+
+        /**
+         * Main function to start the PDF merging process.
+         */
+        async function startMerge() {
+            if (selectedFiles.length < 2) {
+                statusMessage.textContent = 'Please select at least two PDF files to merge.';
+                statusMessage.classList.remove('text-green-500');
+                statusMessage.classList.add('text-red-500');
+                return;
+            }
+
+            // Disable button and show loading state
+            mergeButton.disabled = true;
+            statusMessage.textContent = 'Processing files... This may take a moment.';
+            statusMessage.classList.remove('text-red-500', 'text-green-500');
+            statusMessage.classList.add('text-blue-500');
+
+            try {
+                // Create a new empty PDF document for the merged result
+                const mergedPdf = await PDFLib.PDFDocument.create();
+
+                for (const file of selectedFiles) {
+                    statusMessage.textContent = `Processing: ${file.name}...`;
+
+                    // Read the file content as an ArrayBuffer
+                    const arrayBuffer = await file.arrayBuffer();
+
+                    // Load the PDF into a PDFDocument object
+                    const pdfDoc = await PDFLib.PDFDocument.load(arrayBuffer);
+
+                    // Copy all pages from the source document to the merged document
+                    const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+                    copiedPages.forEach((page) => {
+                        mergedPdf.addPage(page);
+                    });
+                }
+
+                // Serialize the merged document to bytes
+                const pdfBytes = await mergedPdf.save();
+
+                // Create a blob and trigger download
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'merged_document_' + Date.now() + '.pdf';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url); // Clean up memory
+
+                statusMessage.textContent = 'Successfully merged and download started!';
+                statusMessage.classList.remove('text-blue-500');
+                statusMessage.classList.add('text-green-500');
+
+            } catch (error) {
+                console.error("PDF Merge Error:", error);
+                statusMessage.textContent = 'An error occurred during merging. Check console for details.';
+                statusMessage.classList.remove('text-blue-500', 'text-green-500');
+                statusMessage.classList.add('text-red-500');
+            } finally {
+                // Re-enable the button
+                mergeButton.disabled = selectedFiles.length < 2;
+                // Clear the status message after a brief display
+                setTimeout(() => {
+                    if (statusMessage.classList.contains('text-red-500')) {
+                        statusMessage.textContent = 'Ready to merge.';
+                        statusMessage.classList.remove('text-red-500');
+                        statusMessage.classList.add('text-gray-600', 'dark:text-gray-400');
+                    }
+                }, 7000);
+            }
+        }
+        
+        // Initialize UI state on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateFileListUI();
+            statusMessage.textContent = 'Ready to merge.';
+        });
+
+    
+if(typeof updateFileListUI!=="undefined"){window.__dsm_2_updateFileListUI=updateFileListUI;if(typeof window.updateFileListUI==="undefined")window.updateFileListUI=updateFileListUI;}
+if(typeof handleFileSelect!=="undefined"){window.__dsm_2_handleFileSelect=handleFileSelect;if(typeof window.handleFileSelect==="undefined")window.handleFileSelect=handleFileSelect;}
+if(typeof removeFile!=="undefined"){window.__dsm_2_removeFile=removeFile;if(typeof window.removeFile==="undefined")window.removeFile=removeFile;}
+if(typeof startMerge!=="undefined"){window.__dsm_2_startMerge=startMerge;if(typeof window.startMerge==="undefined")window.startMerge=startMerge;}
+if(typeof selectedFiles!=="undefined"){window.__dsm_2_selectedFiles=selectedFiles;if(typeof window.selectedFiles==="undefined")window.selectedFiles=selectedFiles;}
+if(typeof fileInput!=="undefined"){window.__dsm_2_fileInput=fileInput;if(typeof window.fileInput==="undefined")window.fileInput=fileInput;}
+if(typeof fileList!=="undefined"){window.__dsm_2_fileList=fileList;if(typeof window.fileList==="undefined")window.fileList=fileList;}
+if(typeof fileCountSpan!=="undefined"){window.__dsm_2_fileCountSpan=fileCountSpan;if(typeof window.fileCountSpan==="undefined")window.fileCountSpan=fileCountSpan;}
+if(typeof mergeButton!=="undefined"){window.__dsm_2_mergeButton=mergeButton;if(typeof window.mergeButton==="undefined")window.mergeButton=mergeButton;}
+if(typeof statusMessage!=="undefined"){window.__dsm_2_statusMessage=statusMessage;if(typeof window.statusMessage==="undefined")window.statusMessage=statusMessage;}
+if(typeof listItem!=="undefined"){window.__dsm_2_listItem=listItem;if(typeof window.listItem==="undefined")window.listItem=listItem;}
+if(typeof fileDetails!=="undefined"){window.__dsm_2_fileDetails=fileDetails;if(typeof window.fileDetails==="undefined")window.fileDetails=fileDetails;}
+if(typeof fileSize!=="undefined"){window.__dsm_2_fileSize=fileSize;if(typeof window.fileSize==="undefined")window.fileSize=fileSize;}
+if(typeof removeButton!=="undefined"){window.__dsm_2_removeButton=removeButton;if(typeof window.removeButton==="undefined")window.removeButton=removeButton;}
+if(typeof files!=="undefined"){window.__dsm_2_files=files;if(typeof window.files==="undefined")window.files=files;}
+if(typeof mergedPdf!=="undefined"){window.__dsm_2_mergedPdf=mergedPdf;if(typeof window.mergedPdf==="undefined")window.mergedPdf=mergedPdf;}
+if(typeof arrayBuffer!=="undefined"){window.__dsm_2_arrayBuffer=arrayBuffer;if(typeof window.arrayBuffer==="undefined")window.arrayBuffer=arrayBuffer;}
+if(typeof pdfDoc!=="undefined"){window.__dsm_2_pdfDoc=pdfDoc;if(typeof window.pdfDoc==="undefined")window.pdfDoc=pdfDoc;}
+if(typeof copiedPages!=="undefined"){window.__dsm_2_copiedPages=copiedPages;if(typeof window.copiedPages==="undefined")window.copiedPages=copiedPages;}
+if(typeof pdfBytes!=="undefined"){window.__dsm_2_pdfBytes=pdfBytes;if(typeof window.pdfBytes==="undefined")window.pdfBytes=pdfBytes;}
+if(typeof blob!=="undefined"){window.__dsm_2_blob=blob;if(typeof window.blob==="undefined")window.blob=blob;}
+if(typeof url!=="undefined"){window.__dsm_2_url=url;if(typeof window.url==="undefined")window.url=url;}
+if(typeof a!=="undefined"){window.__dsm_2_a=a;if(typeof window.a==="undefined")window.a=a;}
+if(typeof window.onload==="function"&&window.onload!==__dsmPrevOnload){var __dsmFn=window.onload;window.onload=__dsmPrevOnload;window.addEventListener("load",__dsmFn);}
+}catch(e){console.warn("Module 2 script error:",e);}
+})();
+
+</script>
+
+<script>
+(function(){
+try{
+var __dsmRealDoc=window.document;
+var __dsmScope=__dsmRealDoc.querySelector('[data-single-merge-doc="3"]');
+var __dsmPrevOnload=window.onload;
+var document=new Proxy(__dsmRealDoc,{
+get:function(t,prop){
+if(prop==="getElementById"){return function(id){try{if(__dsmScope){var all=__dsmScope.querySelectorAll("[id]");for(var i=0;i<all.length;i++){if(all[i].id===String(id))return all[i];}}}catch(e){}return t.getElementById(id);};}
+if(prop==="querySelector"){return function(sel){try{if(__dsmScope){var el=__dsmScope.querySelector(sel);if(el)return el;}}catch(e){}return t.querySelector(sel);};}
+if(prop==="querySelectorAll"){return function(sel){try{if(__dsmScope){var els=__dsmScope.querySelectorAll(sel);if(els&&els.length)return els;}}catch(e){}return t.querySelectorAll(sel);};}
+if(prop==="getElementsByClassName"){return function(cls){try{if(__dsmScope){var els=__dsmScope.getElementsByClassName(cls);if(els&&els.length)return els;}}catch(e){}return t.getElementsByClassName(cls);};}
+if(prop==="getElementsByTagName"){return function(tag){try{if(__dsmScope){var els=__dsmScope.getElementsByTagName(tag);if(els&&els.length)return els;}}catch(e){}return t.getElementsByTagName(tag);};}
+var v=t[prop];return (typeof v==="function")?v.bind(t):v;
+},
+set:function(t,prop,val){t[prop]=val;return true;},
+has:function(t,prop){return prop in t;}
+});
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+const fileInput=document.getElementById('pdfFile');
+const dropArea=document.getElementById('dropArea');
+const convertBtn=document.getElementById('convertBtn');
+const zipBtn=document.getElementById('zipBtn');
+const pagesBox=document.getElementById('pages');
+
+let pdfDoc=null;
+let results=[];
+let busy=false;
+
+const DPI=800;
+const SCALE=DPI/72;
+const QUALITY=1.0;
+
+fileInput.addEventListener('change',e=>{
+ if(e.target.files[0]) loadPDF(e.target.files[0]);
+});
+
+dropArea.addEventListener('dragover',e=>{
+ e.preventDefault();
+ dropArea.style.borderColor='#22c55e';
+});
+
+dropArea.addEventListener('dragleave',()=>{
+ dropArea.style.borderColor='#4b91e8';
+});
+
+dropArea.addEventListener('drop',e=>{
+ e.preventDefault();
+ dropArea.style.borderColor='#4b91e8';
+ const file=e.dataTransfer.files[0];
+ if(file && file.type==='application/pdf'){
+  loadPDF(file);
+ }
+});
+
+async function loadPDF(file){
+ if(busy)return;
+
+ if(file.type!=='application/pdf' &&
+    !file.name.toLowerCase().endsWith('.pdf')){
+  alert('PDF File மட்டும் தேர்வு செய்யவும்.');
+  return;
+ }
+
+ resetResults();
+
+ document.getElementById('fileName').textContent=file.name;
+ document.getElementById('status').textContent='PDF Loading...';
+
+ try{
+  const buffer=await file.arrayBuffer();
+
+  pdfDoc=await pdfjsLib.getDocument({
+   data:new Uint8Array(buffer)
+  }).promise;
+
+  document.getElementById('totalPages').textContent=pdfDoc.numPages;
+  document.getElementById('status').textContent=
+   'PDF Ready - '+pdfDoc.numPages+' Pages';
+
+  convertBtn.disabled=false;
+
+ }catch(err){
+  console.error(err);
+  document.getElementById('status').textContent='PDF Loading Failed';
+  alert('PDF திறக்க முடியவில்லை. சரியான PDF தேர்வு செய்யவும்.');
+ }
+}
+
+convertBtn.addEventListener('click',convertAll);
+
+async function convertAll(){
+ if(!pdfDoc || busy)return;
+
+ busy=true;
+ convertBtn.disabled=true;
+ fileInput.disabled=true;
+
+ results=[];
+ pagesBox.innerHTML='';
+ zipBtn.disabled=true;
+
+ const total=pdfDoc.numPages;
+
+ try{
+  for(let pageNum=1;pageNum<=total;pageNum++){
+
+   document.getElementById('status').textContent=
+    'Converting Page '+pageNum+' / '+total;
+
+   const page=await pdfDoc.getPage(pageNum);
+   const viewport=page.getViewport({scale:SCALE});
+
+   const width=Math.ceil(viewport.width);
+   const height=Math.ceil(viewport.height);
+
+   const canvas=document.createElement('canvas');
+
+   canvas.width=width;
+   canvas.height=height;
+
+   const ctx=canvas.getContext('2d',{
+    alpha:false
+   });
+
+   ctx.fillStyle='#ffffff';
+   ctx.fillRect(0,0,width,height);
+
+   await page.render({
+    canvasContext:ctx,
+    viewport:viewport,
+    background:'rgb(255,255,255)'
+   }).promise;
+
+   const blob=await new Promise(resolve=>{
+    canvas.toBlob(resolve,'image/jpeg',QUALITY);
+   });
+
+   if(!blob)throw new Error('JPG conversion failed');
+
+   const url=URL.createObjectURL(blob);
+
+   const item={
+    page:pageNum,
+    blob:blob,
+    url:url,
+    width:width,
+    height:height
+   };
+
+   results.push(item);
+
+   createCard(item);
+
+   document.getElementById('converted').textContent=results.length;
+
+   document.getElementById('bar').style.width=
+    (pageNum/total*100)+'%';
+
+   canvas.width=0;
+   canvas.height=0;
+
+   page.cleanup();
+
+   // Browser UI-க்கு இடைவெளி கொடுக்கிறது.
+   await new Promise(resolve=>setTimeout(resolve,0));
+  }
+
+  document.getElementById('status').textContent=
+   'Conversion Completed Successfully!';
+
+  zipBtn.disabled=false;
+
+ }catch(err){
+  console.error(err);
+  document.getElementById('status').textContent=
+   'Conversion stopped: '+err.message;
+
+  alert('Conversion-ல் பிழை ஏற்பட்டது: '+err.message);
+
+  if(results.length>0)zipBtn.disabled=false;
+
+ }finally{
+  busy=false;
+  convertBtn.disabled=false;
+  fileInput.disabled=false;
+ }
+}
+
+function createCard(item){
+ const card=document.createElement('div');
+ card.className='card';
+
+ const img=document.createElement('img');
+ img.src=item.url;
+ img.alt='Page '+item.page;
+
+ const title=document.createElement('h4');
+ title.textContent='Page '+item.page;
+
+ const size=document.createElement('p');
+ size.style.color='#aabbd0';
+ size.style.fontSize='12px';
+ size.textContent=
+  item.width+' × '+item.height+' px | '+
+  (item.blob.size/1024/1024).toFixed(2)+' MB';
+
+ const btn=document.createElement('button');
+ btn.textContent='Download JPG';
+ btn.onclick=()=>{
+  download(item.blob,'Page_'+item.page+'.jpg');
+ };
+
+ card.append(img,title,size,btn);
+ pagesBox.appendChild(card);
+}
+
+function download(blob,name){
+ const url=URL.createObjectURL(blob);
+ const a=document.createElement('a');
+ a.href=url;
+ a.download=name;
+ a.click();
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+
+zipBtn.addEventListener('click',async()=>{
+ if(!results.length)return;
+
+ zipBtn.disabled=true;
+ document.getElementById('status').textContent='Creating ZIP...';
+
+ try{
+  const zip=new JSZip();
+  const folder=zip.folder('PDF_JPG_800_DPI');
+
+  for(const item of results){
+   folder.file('Page_'+String(item.page).padStart(3,'0')+'.jpg',item.blob);
+  }
+
+  const zipBlob=await zip.generateAsync({
+   type:'blob',
+   compression:'STORE'
+  },metadata=>{
+   document.getElementById('status').textContent=
+    'ZIP Creating: '+Math.round(metadata.percent)+'%';
+  });
+
+  download(zipBlob,'PDF_800DPI_JPG.zip');
+
+  document.getElementById('status').textContent='ZIP Download Ready!';
+
+ }catch(err){
+  console.error(err);
+  alert('ZIP உருவாக்க முடியவில்லை.');
+  document.getElementById('status').textContent='ZIP Failed';
+
+ }finally{
+  zipBtn.disabled=false;
+ }
+});
+
+function resetResults(){
+ results.forEach(item=>URL.revokeObjectURL(item.url));
+ results=[];
+ pagesBox.innerHTML='';
+ document.getElementById('converted').textContent='0';
+ document.getElementById('bar').style.width='0%';
+ zipBtn.disabled=true;
+ convertBtn.disabled=true;
+ document.getElementById('totalPages').textContent='0';
+}
+
+document.getElementById('clearBtn').addEventListener('click',()=>{
+ if(busy)return;
+
+ resetResults();
+ pdfDoc=null;
+ fileInput.value='';
+ document.getElementById('fileName').textContent='';
+ document.getElementById('status').textContent='PDF தேர்வு செய்யவும்.';
+});
+
+if(typeof loadPDF!=="undefined"){window.__dsm_3_loadPDF=loadPDF;if(typeof window.loadPDF==="undefined")window.loadPDF=loadPDF;}
+if(typeof convertAll!=="undefined"){window.__dsm_3_convertAll=convertAll;if(typeof window.convertAll==="undefined")window.convertAll=convertAll;}
+if(typeof createCard!=="undefined"){window.__dsm_3_createCard=createCard;if(typeof window.createCard==="undefined")window.createCard=createCard;}
+if(typeof download!=="undefined"){window.__dsm_3_download=download;if(typeof window.download==="undefined")window.download=download;}
+if(typeof resetResults!=="undefined"){window.__dsm_3_resetResults=resetResults;if(typeof window.resetResults==="undefined")window.resetResults=resetResults;}
+if(typeof fileInput!=="undefined"){window.__dsm_3_fileInput=fileInput;if(typeof window.fileInput==="undefined")window.fileInput=fileInput;}
+if(typeof dropArea!=="undefined"){window.__dsm_3_dropArea=dropArea;if(typeof window.dropArea==="undefined")window.dropArea=dropArea;}
+if(typeof convertBtn!=="undefined"){window.__dsm_3_convertBtn=convertBtn;if(typeof window.convertBtn==="undefined")window.convertBtn=convertBtn;}
+if(typeof zipBtn!=="undefined"){window.__dsm_3_zipBtn=zipBtn;if(typeof window.zipBtn==="undefined")window.zipBtn=zipBtn;}
+if(typeof pagesBox!=="undefined"){window.__dsm_3_pagesBox=pagesBox;if(typeof window.pagesBox==="undefined")window.pagesBox=pagesBox;}
+if(typeof pdfDoc!=="undefined"){window.__dsm_3_pdfDoc=pdfDoc;if(typeof window.pdfDoc==="undefined")window.pdfDoc=pdfDoc;}
+if(typeof results!=="undefined"){window.__dsm_3_results=results;if(typeof window.results==="undefined")window.results=results;}
+if(typeof busy!=="undefined"){window.__dsm_3_busy=busy;if(typeof window.busy==="undefined")window.busy=busy;}
+if(typeof DPI!=="undefined"){window.__dsm_3_DPI=DPI;if(typeof window.DPI==="undefined")window.DPI=DPI;}
+if(typeof SCALE!=="undefined"){window.__dsm_3_SCALE=SCALE;if(typeof window.SCALE==="undefined")window.SCALE=SCALE;}
+if(typeof QUALITY!=="undefined"){window.__dsm_3_QUALITY=QUALITY;if(typeof window.QUALITY==="undefined")window.QUALITY=QUALITY;}
+if(typeof file!=="undefined"){window.__dsm_3_file=file;if(typeof window.file==="undefined")window.file=file;}
+if(typeof buffer!=="undefined"){window.__dsm_3_buffer=buffer;if(typeof window.buffer==="undefined")window.buffer=buffer;}
+if(typeof total!=="undefined"){window.__dsm_3_total=total;if(typeof window.total==="undefined")window.total=total;}
+if(typeof page!=="undefined"){window.__dsm_3_page=page;if(typeof window.page==="undefined")window.page=page;}
+if(typeof viewport!=="undefined"){window.__dsm_3_viewport=viewport;if(typeof window.viewport==="undefined")window.viewport=viewport;}
+if(typeof width!=="undefined"){window.__dsm_3_width=width;if(typeof window.width==="undefined")window.width=width;}
+if(typeof height!=="undefined"){window.__dsm_3_height=height;if(typeof window.height==="undefined")window.height=height;}
+if(typeof canvas!=="undefined"){window.__dsm_3_canvas=canvas;if(typeof window.canvas==="undefined")window.canvas=canvas;}
+if(typeof ctx!=="undefined"){window.__dsm_3_ctx=ctx;if(typeof window.ctx==="undefined")window.ctx=ctx;}
+if(typeof blob!=="undefined"){window.__dsm_3_blob=blob;if(typeof window.blob==="undefined")window.blob=blob;}
+if(typeof url!=="undefined"){window.__dsm_3_url=url;if(typeof window.url==="undefined")window.url=url;}
+if(typeof item!=="undefined"){window.__dsm_3_item=item;if(typeof window.item==="undefined")window.item=item;}
+if(typeof card!=="undefined"){window.__dsm_3_card=card;if(typeof window.card==="undefined")window.card=card;}
+if(typeof img!=="undefined"){window.__dsm_3_img=img;if(typeof window.img==="undefined")window.img=img;}
+if(typeof title!=="undefined"){window.__dsm_3_title=title;if(typeof window.title==="undefined")window.title=title;}
+if(typeof size!=="undefined"){window.__dsm_3_size=size;if(typeof window.size==="undefined")window.size=size;}
+if(typeof btn!=="undefined"){window.__dsm_3_btn=btn;if(typeof window.btn==="undefined")window.btn=btn;}
+if(typeof a!=="undefined"){window.__dsm_3_a=a;if(typeof window.a==="undefined")window.a=a;}
+if(typeof zip!=="undefined"){window.__dsm_3_zip=zip;if(typeof window.zip==="undefined")window.zip=zip;}
+if(typeof folder!=="undefined"){window.__dsm_3_folder=folder;if(typeof window.folder==="undefined")window.folder=folder;}
+if(typeof zipBlob!=="undefined"){window.__dsm_3_zipBlob=zipBlob;if(typeof window.zipBlob==="undefined")window.zipBlob=zipBlob;}
+if(typeof window.onload==="function"&&window.onload!==__dsmPrevOnload){var __dsmFn=window.onload;window.onload=__dsmPrevOnload;window.addEventListener("load",__dsmFn);}
+}catch(e){console.warn("Module 3 script error:",e);}
+})();
+
+</script>
 </body>
 </html>
